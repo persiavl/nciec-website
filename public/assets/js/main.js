@@ -6,7 +6,13 @@
 
   /* ---------- header: scrolled state ---------- */
   const header = $('[data-header]');
-  const onScroll = () => header?.classList.toggle('is-scrolled', scrollY > 40);
+  // Collapsing the top bar changes the header height; the gap between the two thresholds
+  // stops that height change from toggling the state back and forth (page jitter).
+  const onScroll = () => {
+    if (!header) return;
+    if (scrollY > 80) header.classList.add('is-scrolled');
+    else if (scrollY < 10) header.classList.remove('is-scrolled');
+  };
   onScroll();
   addEventListener('scroll', onScroll, { passive: true });
 
@@ -86,7 +92,12 @@
       tocLinks.forEach((a) => a.classList.remove('is-active'));
       const a = map.get(e.target.id);
       a?.classList.add('is-active');
-      a?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      // Keep the active tab visible by scrolling the bar sideways only.
+      // (scrollIntoView would also scroll the page and fight the user's wheel/touch scrolling.)
+      const bar = a?.closest('.toc__inner');
+      if (bar && bar.scrollWidth > bar.clientWidth) {
+        bar.scrollTo({ left: a.offsetLeft - (bar.clientWidth - a.offsetWidth) / 2, behavior: reduceMotion ? 'auto' : 'smooth' });
+      }
     }), { rootMargin: '-40% 0px -55% 0px' });
     map.forEach((_, id) => { const s = document.getElementById(id); s && io.observe(s); });
   }

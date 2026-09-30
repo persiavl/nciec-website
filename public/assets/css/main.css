@@ -760,3 +760,4 @@ body:has(.hero) .review-toggle { bottom: 84px; }
 .door-portal__bar { width: 180px; height: 4px; border-radius: 4px; background: rgb(255 255 255 / .2); overflow: hidden; }
 .door-portal__bar::after { content: ''; display: block; height: 100%; width: 0; background: var(--accent); border-radius: 4px; }
 .door-portal.is-open .door-portal__bar::after { width: 100%; transition: width .75s .15s linear; }
+.toc__inner { position: relative; }
