@@ -1,4 +1,4 @@
-import { icon, ph, note, btn, pageHero, checklist, eyebrow, breadcrumbLd } from '../layout.mjs';
+import { icon, ph, note, btn, pageHero, checklist, eyebrow, breadcrumbLd, GROUP_ROOT } from '../layout.mjs';
 
 const days = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
 const shifts = ['08h–14h', '08h–16h', '14h–22h', '22h–06h'];
@@ -8,16 +8,18 @@ const radio = (name, opts, required = false) =>
 
 export default {
   path: '/carrieres/',
+  variant: 'group',
   active: 'carrieres',
-  title: 'Offres d’emploi et candidature | NCIEC Services Luxembourg',
-  description: 'Postes en CDI dans le nettoyage au Luxembourg : agent d’entretien, laveur de vitres. Candidature en ligne, personnel déclaré et formé.',
-  jsonLd: [breadcrumbLd([{ name: 'Carrières', path: '/carrieres/' }])],
+  title: 'Offres d’emploi et candidature | NCIEC Luxembourg',
+  description: 'Postes en CDI au Luxembourg chez NCIEC Services et NCIEC Electro : agent d’entretien, laveur de vitres, candidatures spontanées. Candidature en ligne, personnel déclaré et formé.',
+  jsonLd: [breadcrumbLd([{ name: 'Carrières', path: '/carrieres/' }], { name: 'Accueil', path: '/' })],
   body: () => `
 ${pageHero({
+  root: GROUP_ROOT,
   crumbs: [{ label: 'Carrières' }],
   eyebrowText: 'On recrute',
-  title: 'Travailler chez NCIEC Services',
-  chapeau: 'Contrats déclarés, horaires annoncés à l’avance, formation à la prise de poste et matériel fourni. Nous recrutons en continu au Luxembourg.',
+  title: 'Travailler chez NCIEC',
+  chapeau: 'Contrats déclarés, horaires annoncés à l’avance, formation à la prise de poste et matériel fourni. Nous recrutons en continu au Luxembourg, pour NCIEC Services comme pour NCIEC Electro.',
   cta: btn('Déposer ma candidature', '#candidature', 'primary'),
   image: 'nettoyage-informatique',
   alt: 'Agente NCIEC souriante en intervention sur un poste de travail',
@@ -28,21 +30,21 @@ ${pageHero({
     <h2 id="postes-t">Postes ouverts</h2>
     <div class="job-list">
       <article class="job reveal">
-        <div class="job__head"><span class="job__icon">${icon('sparkle')}</span><h3>Agent d’entretien (H/F) — CDI</h3></div>
+        <p class="job__unit">NCIEC Services</p><div class="job__head"><span class="job__icon">${icon('sparkle')}</span><h3>Agent d’entretien (H/F) — CDI</h3></div>
         <ul class="job__meta" role="list">
           <li>Entrée immédiate</li><li>Permis B requis</li><li>Français exigé</li><li>${ph('Temps plein ou partiel')}</li><li>${ph('Fourchette salariale')}</li>
         </ul>
         <a class="btn btn--outline btn--sm" href="#candidature" data-job="agent-entretien">Postuler${icon('arrow')}</a>
       </article>
       <article class="job reveal">
-        <div class="job__head"><span class="job__icon">${icon('window')}</span><h3>Laveur de vitres (H/F) — CDI</h3></div>
+        <p class="job__unit">NCIEC Services</p><div class="job__head"><span class="job__icon">${icon('window')}</span><h3>Laveur de vitres (H/F) — CDI</h3></div>
         <ul class="job__meta" role="list">
           <li>Entrée immédiate</li><li>Permis B requis</li><li>Français exigé</li><li>${ph('Formation travaux en hauteur assurée en interne')}</li><li>${ph('Fourchette salariale')}</li>
         </ul>
         <a class="btn btn--outline btn--sm" href="#candidature" data-job="laveur-vitres">Postuler${icon('arrow')}</a>
       </article>
     </div>
-    ${note('Indiquer une fourchette salariale augmente nettement le volume de candidatures qualifiées dans ce secteur. À arbitrer avec le client.', 'info')}
+    ${note('Aucune offre NCIEC Electro n’est publiée pour l’instant (vente, livraison, installation ?) — à compléter avec le client. Indiquer une fourchette salariale augmente nettement le volume de candidatures qualifiées dans ce secteur. À arbitrer avec le client.', 'info')}
   </div>
 </section>
 
@@ -90,7 +92,7 @@ ${pageHero({
           <legend class="sr-only">Disponibilités et mobilité</legend>
           <div class="field-grid">
             <div class="field"><label for="c-poste">Poste souhaité</label>
-              <select id="c-poste" name="poste" required><option value="">Choisir…</option><option value="agent-entretien">Agent d’entretien</option><option value="laveur-vitres">Laveur de vitres</option><option value="spontanee">Autre / candidature spontanée</option></select></div>
+              <select id="c-poste" name="poste" required><option value="">Choisir…</option><option value="agent-entretien">Agent d’entretien</option><option value="laveur-vitres">Laveur de vitres</option><option value="electro">NCIEC Electro — vente, livraison, installation</option><option value="spontanee">Autre / candidature spontanée</option></select></div>
             <div class="field"><label for="c-date">Disponible à partir du</label><input id="c-date" name="disponibilite" type="date"></div>
           </div>
           <div class="field"><span class="field__label">Temps de travail</span>${radio('temps', [['plein', 'Temps plein'], ['partiel', 'Temps partiel'], ['indifferent', 'Indifférent']], true)}</div>

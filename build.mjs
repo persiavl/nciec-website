@@ -4,6 +4,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { layout, SITE } from './src/layout.mjs';
 
+import group from './src/pages/group.mjs';
 import home from './src/pages/home.mjs';
 import hub from './src/pages/hub.mjs';
 import batiments from './src/pages/batiments.mjs';
@@ -30,7 +31,7 @@ const BASE = (process.env.BASE_PATH || '').replace(/\/$/, '');
 const DEMO = process.env.DEMO === '1';
 const withBase = (html) => (BASE ? html.replace(/\b(href|src|poster|data-src-[a-z]+)="\/(?!\/)/g, `$1="${BASE}/`) : html);
 
-const pages = [home, hub, batiments, vitres, chantier, exterieurs, facades, facility, transverses, particuliers, references, aPropos, carrieres, contact, ...misc];
+const pages = [group, home, hub, batiments, vitres, chantier, exterieurs, facades, facility, transverses, particuliers, references, aPropos, carrieres, contact, ...misc];
 
 // 301 map from the copy deck annex (old URL → new URL).
 const REDIRECTS = [

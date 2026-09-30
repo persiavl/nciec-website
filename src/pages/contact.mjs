@@ -1,34 +1,44 @@
-import { icon, SITE, ph, note, pageHero, breadcrumbLd } from '../layout.mjs';
+import { icon, SITE, ELECTRO, ph, note, pageHero, logo, breadcrumbLd, GROUP_ROOT } from '../layout.mjs';
 import { PRESTATIONS } from '../data.mjs';
+
+const ELECTRO_TOPICS = [
+  ['electro-conseil', 'Conseil produit ou demande de prix'],
+  ['electro-pro', 'Gamme professionnelle'],
+  ['electro-installation', 'Livraison et installation'],
+  ['electro-sav', 'Service après-vente'],
+];
 
 export default {
   path: '/contact/',
+  variant: 'group',
   active: 'contact',
-  title: 'Contact et demande de devis | NCIEC Services Luxembourg',
-  description: 'Demandez un devis gratuit pour le nettoyage de vos locaux. +352 20 30 60 60 — 15 rue des Joncs, L-1818 Howald.',
-  jsonLd: [breadcrumbLd([{ name: 'Contact', path: '/contact/' }])],
+  title: 'Contact et demande de devis | NCIEC Luxembourg',
+  description: 'Contactez NCIEC Services (nettoyage, +352 20 30 60 60) ou NCIEC Electro (électroménager, +352 40 30 60) — 15 rue des Joncs, L-1818 Howald.',
+  jsonLd: [breadcrumbLd([{ name: 'Contact', path: '/contact/' }], { name: 'Accueil', path: '/' })],
   body: () => `
 ${pageHero({
+  root: GROUP_ROOT,
   crumbs: [{ label: 'Contact' }],
   eyebrowText: 'Devis gratuit',
   title: 'Contactez-nous',
-  chapeau: `Décrivez votre besoin en quelques lignes. Nous vous rappelons sous ${ph('24 h ouvrées')} et proposons une visite sur site avant tout chiffrage.`,
+  chapeau: `Nettoyage, facility services ou électroménager : décrivez votre besoin en quelques lignes, nous transmettons votre demande à la bonne équipe. Pour un devis de nettoyage, nous vous rappelons sous ${ph('24 h ouvrées')}.`,
 })}
 
 <section class="section section--flush-top">
   <div class="container contact-grid">
     <div class="form-card" id="devis">
-      <h2>Demander un devis</h2>
+      <h2>Votre demande</h2>
       <form class="form" data-quote-form data-simple-form novalidate>
         <div class="field"><span class="field__label">Je suis</span>
           <div class="choice-row">
             ${['Entreprise', 'Institution', 'Copropriété', 'Particulier'].map((v, i) => `<label class="choice"><input type="radio" name="profil" value="${v.toLowerCase()}"${i === 0 ? ' required' : ''}><span>${v}</span></label>`).join('')}
           </div>
         </div>
-        <div class="field"><label for="q-prest">Prestation souhaitée</label>
+        <div class="field"><label for="q-prest">Votre demande concerne</label>
           <select id="q-prest" name="prestation" required>
             <option value="">Choisir une prestation…</option>
-            ${PRESTATIONS.map((p) => `<option value="${p.value}">${p.label}</option>`).join('')}
+            <optgroup label="NCIEC Services — nettoyage et facility services">${PRESTATIONS.map((p) => `<option value="${p.value}">${p.label}</option>`).join('')}</optgroup>
+            <optgroup label="NCIEC Electro — électroménager">${ELECTRO_TOPICS.map(([v, l]) => `<option value="${v}">${l}</option>`).join('')}</optgroup>
           </select>
           <p class="field__hint" data-prefill-hint hidden>${icon('check', 'icon icon--xs')}Prérempli depuis la page que vous consultiez — modifiable.</p>
         </div>
@@ -48,7 +58,7 @@ ${pageHero({
 
     <aside class="contact-aside">
       <div class="info-card">
-        <h2 class="h3">Coordonnées</h2>
+        ${logo('services', 'NCIEC Services', 'g-contact__logo')}
         <address>
           <strong>${SITE.legal}</strong><br>${SITE.street}<br>${SITE.zip} ${SITE.city}, ${SITE.country}
         </address>
@@ -57,6 +67,15 @@ ${pageHero({
           <li>${icon('mail')}<a href="mailto:${SITE.email}">${SITE.email}</a></li>
           <li>${icon('clock')}<span>${ph('lundi–vendredi, XX h–XX h')}</span></li>
           <li class="info-list__alert">${icon('alert')}<span>Urgences sinistre : ${ph('numéro dédié, si existant')}</span></li>
+        </ul>
+      </div>
+      <div class="info-card">
+        ${logo('electro', 'NCIEC Electro', 'g-contact__logo')}
+        <ul class="info-list" role="list">
+          <li>${icon('phone')}<a href="${ELECTRO.phoneHref}">${ELECTRO.phone}</a></li>
+          <li>${icon('mail')}<span>${ph('e-mail NCIEC Electro')}</span></li>
+          <li>${icon('clock')}<span>${ELECTRO.hours}</span></li>
+          <li>${icon('external')}<a href="${ELECTRO.url}" target="_blank" rel="noopener">Boutique en ligne<span class="sr-only"> (nouvel onglet)</span></a></li>
         </ul>
       </div>
       <div class="info-card map-card">

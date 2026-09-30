@@ -1,4 +1,4 @@
-import { icon, ph, note, btn, pageHero, devis } from '../layout.mjs';
+import { icon, ph, note, btn, pageHero, devis, GROUP_ROOT } from '../layout.mjs';
 
 // ---------- WCAG contrast, computed at build time for the palette page ----------
 const lum = (hex) => {
@@ -44,9 +44,9 @@ const swatch = (s) => {
 };
 
 const legal = (path, title, h1) => ({
-  path, title: `${title} | NCIEC Services`, description: `${h1} — NCIEC Services S.àr.l., Howald, Luxembourg.`,
+  path, variant: 'group', title: `${title} | NCIEC`, description: `${h1} — NCIEC Services S.àr.l., Howald, Luxembourg.`,
   body: () => `
-${pageHero({ crumbs: [{ label: h1 }], title: h1 })}
+${pageHero({ root: GROUP_ROOT, crumbs: [{ label: h1 }], title: h1 })}
 <section class="section section--flush-top"><div class="container narrow prose">
   ${note('Contenu juridique à fournir par le client (texte actuel de nciec.lu à reprendre et à relire).', 'info')}
   <p>${ph('Texte juridique')}</p>
@@ -78,6 +78,7 @@ ${pageHero({ crumbs: [{ label: 'Charte' }], eyebrowText: 'Document interne · no
   {
     path: '/404.html',
     file: '404.html',
+    variant: 'group',
     noindex: true,
     title: 'Page introuvable | NCIEC Services',
     description: 'Cette page n’existe pas ou a été déplacée.',
@@ -86,7 +87,7 @@ ${pageHero({ crumbs: [{ label: 'Charte' }], eyebrowText: 'Document interne · no
   <p class="notfound__code">404</p>
   <h1>Cette page n’existe plus</h1>
   <p class="lead">Le site a été réorganisé. La plupart des anciennes adresses sont redirigées automatiquement ; sinon, repartez d’ici :</p>
-  <div class="btn-row btn-row--center">${btn('Nos solutions', '/nos-solutions/', 'primary')}${btn('Demander un devis', devis(''), 'outline')}</div>
+  <div class="btn-row btn-row--center">${btn('Accueil', '/', 'primary')}${btn('NCIEC Services', '/services/', 'outline')}${btn('Demander un devis', devis(''), 'outline')}</div>
 </div></section>`,
   },
 ];

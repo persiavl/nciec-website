@@ -13,6 +13,17 @@ export const SITE = {
   shop: 'https://nciecsales.lu',
 };
 
+// Second business of the group — the appliance shop (nciecsales.lu, brand "NCIEC Electro").
+export const ELECTRO = {
+  name: 'NCIEC Electro',
+  url: 'https://nciecsales.lu/',
+  phone: '+352 40 30 60',
+  phoneHref: 'tel:+35240306060',
+  hours: 'Lundi–vendredi, 8 h–12 h et 13 h–16 h',
+  categories: ['Gros électroménager', 'Appareils encastrables', 'Cuisine et ménage', 'TV et audio', 'Traitement de l’air', 'Outillage', 'Gamme professionnelle'],
+  brands: ['Bosch', 'Siemens', 'Samsung', 'LG', 'Liebherr', 'Smeg', 'Electrolux', 'Dyson', 'Makita', 'Nilfisk'],
+};
+
 // B2B solutions — one source for the home grid, the hub, the mega menu and the related-links rail.
 export const SOLUTIONS = [
   {

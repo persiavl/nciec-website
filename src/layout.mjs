@@ -1,7 +1,25 @@
+import { readFileSync } from 'node:fs';
 import { icon } from './icons.mjs';
-import { SITE, SOLUTIONS, devis } from './data.mjs';
+import { SITE, SOLUTIONS, ELECTRO, devis } from './data.mjs';
 
-export { icon, SITE, SOLUTIONS, devis };
+export { icon, SITE, SOLUTIONS, ELECTRO, devis };
+
+// ---------- logos ----------
+// Built from the official SVG: paths 0–5 = mark, 6–10 = "NCIEC", 11–18 = "Services", 19–22 = legal mark.
+// Colours go through CSS variables so the same symbol works on light and dark backgrounds.
+const logoPaths = readFileSync(new URL('../public/assets/img/logo-nciec.svg', import.meta.url), 'utf8')
+  .match(/<path[^>]*><\/path>/g)
+  .map((p) => p.replace(/fill="#008AD2"/i, 'fill="var(--lg-main, #008AD2)"').replace(/fill="#C8E8F9"/i, 'fill="var(--lg-soft, #C8E8F9)"'));
+const pick = (...ranges) => ranges.flatMap(([a, b]) => logoPaths.slice(a, b + 1)).join('');
+const LOGO_SPRITE = `<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="logo-group" viewBox="0 0 391 139">${pick([0, 5])}<g transform="translate(0 35)">${pick([6, 10], [19, 22])}</g></symbol>
+<symbol id="logo-services" viewBox="0 0 391 139">${pick([0, 22])}</symbol>
+<symbol id="logo-electro" viewBox="0 0 391 139">${pick([0, 10], [19, 22])}<text x="169" y="121" fill="var(--lg-main, #008AD2)" font-family="Jakarta, 'Segoe UI', sans-serif" font-weight="700" font-size="50" letter-spacing="-1">Electro</text></symbol>
+</svg>`;
+
+/** Inline logo from the sprite. name: 'group' | 'services' | 'electro' */
+export const logo = (name, label, cls = 'logo') =>
+  `<svg class="${cls}" viewBox="0 0 391 139" role="img" aria-label="${label}"><use href="#logo-${name}"/></svg>`;
 
 // ---------- small helpers ----------
 
@@ -30,8 +48,11 @@ export const slugify = (s) =>
 
 // ---------- page-level components ----------
 
-export function pageHero({ crumbs = [], title, chapeau, cta, image, alt, eyebrowText }) {
-  const trail = [{ label: 'Accueil', href: '/' }, ...crumbs];
+export const SERVICES_ROOT = { label: 'NCIEC Services', href: '/services/' };
+export const GROUP_ROOT = { label: 'Accueil', href: '/' };
+
+export function pageHero({ crumbs = [], title, chapeau, cta, image, alt, eyebrowText, root = SERVICES_ROOT }) {
+  const trail = [root, ...crumbs];
   return `
 <section class="page-hero">
   <div class="container page-hero__grid">
@@ -112,7 +133,7 @@ export function complementaires(items) {
 // ---------- layout ----------
 
 const NAV = [
-  { key: 'home', label: 'Accueil', href: '/' },
+  { key: 'home', label: 'Accueil', href: '/services/' },
   { key: 'solutions', label: 'Nos solutions', href: '/nos-solutions/', mega: true },
   { key: 'references', label: 'Références', href: '/references/' },
   { key: 'a-propos', label: 'À propos', href: '/a-propos/' },
@@ -149,12 +170,13 @@ function header(active, overlay) {
   <div class="topbar">
     <div class="container topbar__inner">
       <p class="topbar__contact">
+        <a class="topbar__group" href="/">${icon('arrow', 'icon icon--xs topbar__back')}Groupe NCIEC</a>
         <a href="${SITE.phoneHref}">${icon('phone', 'icon icon--xs')}${SITE.phone}</a>
         <a href="mailto:${SITE.email}">${icon('mail', 'icon icon--xs')}${SITE.email}</a>
       </p>
       <p class="topbar__links">
         ${ext('Espace client', SITE.portal)}
-        ${ext('Électroménager', SITE.shop)}
+        ${ext('NCIEC Electro', ELECTRO.url)}
         <span class="lang" role="group" aria-label="Langue">
           <a href="/" aria-current="true" lang="fr">FR</a>
           <span aria-disabled="true" title="Traduction anglaise à venir" lang="en">EN</span>
@@ -165,7 +187,7 @@ function header(active, overlay) {
   </div>
   <div class="navbar">
     <div class="container navbar__inner">
-      <a class="brand" href="/" aria-label="NCIEC Services — accueil">
+      <a class="brand" href="/services/" aria-label="NCIEC Services — accueil">
         <img class="brand__logo brand__logo--color" src="/assets/img/logo-nciec.svg" alt="" width="140" height="50">
         <img class="brand__logo brand__logo--white" src="/assets/img/logo-nciec-white.svg" alt="" width="140" height="50">
       </a>
@@ -183,7 +205,7 @@ function header(active, overlay) {
         </ul>
         <div class="mainnav__mobile-extra">
           ${ext('Espace client', SITE.portal)}
-          ${ext('Électroménager', SITE.shop)}
+          ${ext('NCIEC Electro', ELECTRO.url)}
           <a href="${SITE.phoneHref}">${icon('phone', 'icon icon--xs')}${SITE.phone}</a>
         </div>
       </nav>
@@ -216,12 +238,13 @@ function footer() {
     <nav aria-label="Entreprise">
       <p class="site-footer__title">Entreprise</p>
       <ul>
+        <li><a href="/">Groupe NCIEC</a></li>
         <li><a href="/references/">Références</a></li>
         <li><a href="/a-propos/">À propos et engagements</a></li>
         <li><a href="/carrieres/">Carrières</a></li>
         <li><a href="/contact/">Contact</a></li>
         <li>${ext('Espace client', SITE.portal)}</li>
-        <li>${ext('Électroménager', SITE.shop)}</li>
+        <li>${ext('NCIEC Electro', ELECTRO.url)}</li>
       </ul>
     </nav>
     <div>
@@ -244,7 +267,114 @@ function footer() {
 <button class="review-toggle" type="button" aria-pressed="false" data-review-toggle title="Affiche les notes de rédaction et les points à valider">${icon('eye', 'icon icon--xs')}<span>Mode relecture</span></button>`;
 }
 
-export function layout({ path, title, description, body, active = '', overlay = false, noindex = false, jsonLd = [], ogImage = '/assets/img/og-image.jpg' }) {
+// ---------- group (portal) header & footer ----------
+
+const GROUP_NAV = [
+  { key: 'activites', label: 'Nos activités', href: '/#activites' },
+  { key: 'a-propos', label: 'À propos', href: '/a-propos/' },
+  { key: 'carrieres', label: 'Carrières', href: '/carrieres/' },
+  { key: 'implantation', label: 'Implantation', href: '/#implantation' },
+  { key: 'contact', label: 'Contact', href: '/contact/' },
+];
+
+function groupHeader(active) {
+  return `
+<a class="skip-link" href="#main">Aller au contenu</a>
+<header class="site-header site-header--group" data-header>
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <p class="topbar__contact">
+        <a href="${SITE.phoneHref}">${icon('phone', 'icon icon--xs')}<span class="topbar__who">Services</span>${SITE.phone}</a>
+        <a href="${ELECTRO.phoneHref}">${icon('phone', 'icon icon--xs')}<span class="topbar__who">Electro</span>${ELECTRO.phone}</a>
+      </p>
+      <p class="topbar__links">
+        ${ext('Espace client', SITE.portal)}
+        <span class="lang" role="group" aria-label="Langue">
+          <a href="/" aria-current="true" lang="fr">FR</a>
+          <span aria-disabled="true" title="Traduction anglaise à venir" lang="en">EN</span>
+          <span aria-disabled="true" title="Version allemande à l'étude" lang="de">DE</span>
+        </span>
+      </p>
+    </div>
+  </div>
+  <div class="navbar">
+    <div class="container navbar__inner">
+      <a class="brand" href="/" aria-label="Groupe NCIEC — accueil">${logo('group', 'NCIEC', 'brand__logo brand__logo--group')}</a>
+      <nav class="mainnav" aria-label="Navigation principale" data-mainnav>
+        <ul class="mainnav__list">
+          ${GROUP_NAV.map((n) => `<li><a href="${n.href}"${active === n.key ? ' aria-current="page"' : ''}>${n.label}</a></li>`).join('')}
+        </ul>
+        <div class="mainnav__mobile-extra">
+          <a href="/services/">${icon('building', 'icon icon--xs')}NCIEC Services</a>
+          ${ext('NCIEC Electro', ELECTRO.url)}
+          ${ext('Espace client', SITE.portal)}
+        </div>
+      </nav>
+      <div class="unit-switch" aria-label="Nos sites">
+        <a href="/services/">Services</a>
+        <a href="${ELECTRO.url}" target="_blank" rel="noopener">Electro${icon('external', 'icon icon--xs')}<span class="sr-only"> (nouvel onglet)</span></a>
+      </div>
+      <button class="burger" aria-expanded="false" aria-controls="mobile-nav" data-burger>
+        ${icon('menu', 'icon burger__open')}${icon('close', 'icon burger__close')}<span class="sr-only">Menu</span>
+      </button>
+    </div>
+  </div>
+</header>`;
+}
+
+function groupFooter() {
+  return `
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      ${logo('group', 'NCIEC', 'site-footer__logo')}
+      <p>Deux activités, une même adresse à Howald : l’entretien des bâtiments avec NCIEC Services, l’électroménager et l’équipement avec NCIEC Electro.</p>
+    </div>
+    <nav aria-label="NCIEC Services">
+      <p class="site-footer__title">NCIEC Services</p>
+      <ul>
+        <li><a href="/services/">Nettoyage et facility services</a></li>
+        <li><a href="/nos-solutions/">Nos solutions</a></li>
+        <li><a href="/particuliers/">Services aux particuliers</a></li>
+        <li><a href="/references/">Références</a></li>
+        <li><a href="${devis('')}">Demander un devis</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="NCIEC Electro">
+      <p class="site-footer__title">NCIEC Electro</p>
+      <ul>
+        <li>${ext('Boutique en ligne', ELECTRO.url)}</li>
+        <li><a href="${ELECTRO.phoneHref}">${ELECTRO.phone}</a></li>
+        <li><span>${ELECTRO.hours}</span></li>
+      </ul>
+      <p class="site-footer__title site-footer__title--gap">Groupe</p>
+      <ul>
+        <li><a href="/a-propos/">À propos</a></li>
+        <li><a href="/carrieres/">Carrières</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li>${ext('Espace client', SITE.portal)}</li>
+      </ul>
+    </nav>
+    <div>
+      <p class="site-footer__title">Nous trouver</p>
+      <address>${SITE.legal}<br>${SITE.street}<br>${SITE.zip} ${SITE.city} · ${SITE.country}</address>
+      <p class="site-footer__contact">
+        <a href="${SITE.phoneHref}">${icon('phone', 'icon icon--xs')}Services ${SITE.phone}</a>
+        <a href="${ELECTRO.phoneHref}">${icon('phone', 'icon icon--xs')}Electro ${ELECTRO.phone}</a>
+        <a href="mailto:${SITE.email}">${icon('mail', 'icon icon--xs')}${SITE.email}</a>
+      </p>
+    </div>
+  </div>
+  <div class="container site-footer__bottom">
+    <p>© <span data-year>2026</span> N.C.I.E.C. S.àr.l.</p>
+    <p><a href="/rgpd/">Protection des données</a><a href="/mentions-legales/">Mentions légales</a></p>
+  </div>
+</footer>
+<button class="review-toggle" type="button" aria-pressed="false" data-review-toggle title="Affiche les notes de rédaction et les points à valider">${icon('eye', 'icon icon--xs')}<span>Mode relecture</span></button>`;
+}
+
+export function layout({ path, title, description, body, active = '', overlay = false, noindex = false, jsonLd = [], ogImage = '/assets/img/og-image.jpg', variant = 'services' }) {
+  const group = variant === 'group';
   const canonical = SITE.url + path;
   const ld = jsonLd.map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('\n');
   return `<!doctype html>
@@ -258,7 +388,7 @@ export function layout({ path, title, description, body, active = '', overlay = 
 ${noindex ? '<meta name="robots" content="noindex">' : ''}
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_LU">
-<meta property="og:site_name" content="NCIEC Services">
+<meta property="og:site_name" content="${group ? 'NCIEC' : 'NCIEC Services'}">
 <meta property="og:title" content="${title}">
 <meta property="og:description" content="${description}">
 <meta property="og:url" content="${canonical}">
@@ -272,21 +402,22 @@ ${noindex ? '<meta name="robots" content="noindex">' : ''}
 ${ld}
 </head>
 <body>
-${header(active, overlay)}
+${LOGO_SPRITE}
+${group ? groupHeader(active) : header(active, overlay)}
 <main id="main">
 ${body}
 </main>
-${footer()}
+${group ? groupFooter() : footer()}
 <script src="/assets/js/main.js" defer></script>
 </body>
 </html>
 `;
 }
 
-export const breadcrumbLd = (items) => ({
+export const breadcrumbLd = (items, root = { name: 'NCIEC Services', path: '/services/' }) => ({
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
-  itemListElement: [{ name: 'Accueil', path: '/' }, ...items].map((it, i) => ({
+  itemListElement: [root, ...items].map((it, i) => ({
     '@type': 'ListItem', position: i + 1, name: it.name, item: SITE.url + it.path,
   })),
 });
