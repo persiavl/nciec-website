@@ -3,7 +3,6 @@ import { icon, SITE, SOLUTIONS, devis, ph, note, btn, link, img, eyebrow, ctaBan
 export default {
   path: '/',
   active: 'home',
-  overlay: true,
   title: 'Nettoyage et facility services au Luxembourg | NCIEC Services',
   description: `Nettoyage de bureaux, vitres, façades, extérieurs et facility services au Luxembourg. Équipes formées, planning fiable, devis sous 48 h.`,
   jsonLd: [{
