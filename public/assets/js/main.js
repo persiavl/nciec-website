@@ -274,7 +274,7 @@
     e.preventDefault();
 
     const tone = door.dataset.doorTone;
-    const card = door.closest('.unit').getBoundingClientRect();
+    const card = (door.closest('.unit') || door).getBoundingClientRect();
     // Keyboard activation reports 0/0 — start from the card centre instead.
     const x = e.clientX || card.left + card.width / 2;
     const y = e.clientY || card.top + card.height / 2;

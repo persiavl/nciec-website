@@ -9,6 +9,14 @@ const appliances = `
   <path d="M8 182h344" opacity=".35"/>
 </svg>`;
 
+/** Wide coloured bar at the bottom of the hero — one per business (layout requested by the client). */
+const bar = ({ href, name, what, domain, tone, external }) => `
+<a class="g-bar g-bar--${tone}" href="${href}" data-door data-door-tone="${tone}" data-door-domain="${domain}">
+  <span class="g-bar__text"><strong>Entrer sur ${name}</strong><small>${what} · ${domain}</small></span>
+  <span class="g-bar__arrow" aria-hidden="true">${icon(external ? 'external' : 'arrow')}</span>
+</a>`;
+
+
 /** Full-width "door" at the bottom of a business card. Its ::after stretches over the whole card. */
 const door = ({ href, label, domain, tone, external }) => `
 <a class="door" href="${href}" data-door data-door-tone="${tone}" data-door-domain="${domain}">
@@ -39,17 +47,39 @@ export default {
     ],
   }],
   body: () => `
-<section class="g-hero" aria-labelledby="g-title">
-  <div class="container g-hero__inner">
-    <div class="g-hero__text">
-      ${eyebrow('Groupe NCIEC · Howald, Luxembourg')}
-      <h1 id="g-title">Entretenir et équiper vos bâtiments</h1>
-    </div>
-    <p class="g-hero__lead">Deux métiers complémentaires, une même adresse : le nettoyage et les facility services avec <strong>NCIEC Services</strong>, l’électroménager et l’équipement avec <strong>NCIEC Electro</strong>.</p>
+<section class="hero g-vhero" aria-labelledby="g-title">
+  <div class="hero__media">
+    <video class="hero__video" autoplay muted loop playsinline preload="metadata"
+      poster="/assets/video/teaser-poster.webp"
+      data-src-desktop="/assets/video/teaser-720.mp4" data-src-mobile="/assets/video/teaser-480.mp4" aria-hidden="true">
+    </video>
+    <div class="hero__scrim"></div>
   </div>
+  <div class="container g-vhero__content">
+    <p class="g-vhero__eyebrow">Groupe NCIEC · Howald, Luxembourg</p>
+    <h1 id="g-title">Entretenir et équiper<br>vos bâtiments</h1>
+    <p class="g-vhero__lead">Deux métiers, une même adresse. Choisissez votre activité :</p>
+  </div>
+  <div class="container g-bars" aria-label="Nos deux sites">
+    ${bar({ href: '/services/', name: 'NCIEC Services', what: 'Nettoyage et facility services', domain: 'nciec.lu/services', tone: 'services', external: false })}
+    ${bar({ href: ELECTRO.url, name: 'NCIEC Electro', what: 'Électroménager et équipement', domain: 'nciecsales.lu', tone: 'electro', external: true })}
+  </div>
+  <button class="g-vhero__pause video-toggle" type="button" data-video-toggle aria-pressed="false">
+    <span class="video-toggle__pause">${icon('pause', 'icon icon--sm')}<span class="sr-only">Mettre la vidéo en pause</span></span>
+    <span class="video-toggle__play">${icon('play', 'icon icon--sm')}<span class="sr-only">Lire la vidéo</span></span>
+  </button>
 </section>
 
-<section class="g-units" id="activites" aria-label="Nos activités">
+<section class="section g-units" id="activites" aria-labelledby="activites-t">
+  <div class="container">
+    <div class="section-head section-head--split">
+      <div>
+        ${eyebrow('Nos activités')}
+        <h2 id="activites-t">Deux sites, un seul groupe</h2>
+      </div>
+      <p class="lead">NCIEC Services entretient vos bâtiments sur site. NCIEC Electro vend, livre et installe l\u2019équipement. Chaque activité a son propre site et son équipe.</p>
+    </div>
+  </div>
   <div class="container g-units__grid">
 
     <article class="unit unit--services">

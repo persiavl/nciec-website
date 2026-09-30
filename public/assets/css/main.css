@@ -761,3 +761,34 @@ body:has(.hero) .review-toggle { bottom: 84px; }
 .door-portal__bar::after { content: ''; display: block; height: 100%; width: 0; background: var(--accent); border-radius: 4px; }
 .door-portal.is-open .door-portal__bar::after { width: 100%; transition: width .75s .15s linear; }
 .toc__inner { position: relative; }
+
+/* ---------- landing: video hero with two business bars (client reference: Sainte-Sophie) ---------- */
+.g-vhero { justify-content: flex-end; }
+.g-vhero .hero__scrim { background:
+  linear-gradient(180deg, rgb(14 34 51 / .35) 0%, rgb(14 34 51 / .1) 35%, rgb(14 34 51 / .55) 70%, rgb(14 34 51 / .85) 100%),
+  linear-gradient(90deg, rgb(14 34 51 / .45) 0%, rgb(14 34 51 / 0) 60%); }
+.g-vhero__content { padding-block: clamp(56px, 12vh, 140px) clamp(24px, 4vh, 40px); }
+.g-vhero__eyebrow { margin: 0 0 18px; font: 700 .8rem/1 var(--font-body); letter-spacing: .14em; text-transform: uppercase; color: #fff; }
+.g-vhero h1 { font-size: clamp(2.6rem, 6.2vw, 5.4rem); line-height: 1.02; letter-spacing: -.035em; margin: 0 0 .3em; color: #fff; text-shadow: 0 2px 30px rgb(14 34 51 / .35); }
+.g-vhero__lead { margin: 0; font-size: clamp(1.05rem, 1.5vw, 1.25rem); color: #E4EEF6; }
+.g-bars { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding-bottom: clamp(56px, 8vh, 88px); }
+.g-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 84px; padding: 18px 20px 18px 28px; border-radius: var(--radius-sm); text-decoration: none; box-shadow: 0 18px 40px -18px rgb(0 0 0 / .5); transition: transform .3s var(--ease), box-shadow .3s, filter .3s; }
+.g-bar--services { background: var(--blue-600); color: #fff; }
+.g-bar--electro { background: var(--accent); color: var(--navy); }
+.g-bar:hover { transform: translateY(-3px); box-shadow: 0 26px 50px -18px rgb(0 0 0 / .6); }
+.g-bar--services:hover { color: #fff; filter: brightness(1.08); }
+.g-bar--electro:hover { color: var(--navy); filter: brightness(1.04); }
+.g-bar:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.g-bar__text { display: grid; gap: 3px; min-width: 0; }
+.g-bar__text strong { font: 700 clamp(1.05rem, 1.6vw, 1.3rem)/1.2 var(--font-head); letter-spacing: -.01em; }
+.g-bar__text small { font-size: .88rem; opacity: .85; }
+.g-bar__arrow { flex: none; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; border: 2px solid currentColor; transition: transform .3s var(--ease), background-color .3s, color .3s; }
+.g-bar__arrow .icon { width: 20px; height: 20px; }
+.g-bar--services:hover .g-bar__arrow { background: #fff; color: var(--blue-600); border-color: #fff; transform: translateX(4px); }
+.g-bar--electro:hover .g-bar__arrow { background: var(--navy); color: var(--accent); border-color: var(--navy); transform: translate(3px, -3px); }
+.g-vhero__pause { position: absolute; left: 16px; bottom: 16px; width: 42px; height: 42px; padding: 0; justify-content: center; border-radius: 50%; background: rgb(14 34 51 / .4); }
+.g-vhero__pause > span { gap: 0; }
+.g-units { margin-top: 0; padding-bottom: clamp(56px, 8vw, 112px); }
+@media (max-width: 760px) { .g-bars { grid-template-columns: 1fr; gap: 12px; padding-bottom: 72px; } .g-bar { min-height: 72px; } }
+/* landing: bars occupy the lower hero, pause button sits bottom-left → review button bottom-right */
+body:has(.g-vhero) .review-toggle { left: auto; right: 16px; bottom: 16px; }
