@@ -71,13 +71,19 @@ export default {
 </section>
 
 <section class="section g-units" id="activites" aria-labelledby="activites-t">
-  <div class="container">
-    <div class="section-head section-head--split">
-      <div>
-        ${eyebrow('Nos activités')}
-        <h2 id="activites-t">Deux sites, un seul groupe</h2>
-      </div>
-      <p class="lead">NCIEC Services entretient vos bâtiments sur site. NCIEC Electro vend, livre et installe l\u2019équipement. Chaque activité a son propre site et son équipe.</p>
+  <div class="container g-intro">
+    <div>
+      ${eyebrow('Le groupe')}
+      <h2 id="activites-t">Une entreprise luxembourgeoise, deux savoir-faire</h2>
+    </div>
+    <div class="g-intro__side">
+      <p class="lead">Depuis ${ph('année')}, NCIEC entretient et équipe des bâtiments au Luxembourg. NCIEC Services intervient sur site pour le nettoyage et les facility services ; NCIEC Electro conseille, vend, livre et installe l\u2019équipement.</p>
+      <ul class="g-facts" role="list">
+        <li><strong>2</strong><span>activités complémentaires</span></li>
+        <li><strong>${ph('X')}</strong><span>collaborateurs</span></li>
+        <li><strong>1</strong><span>site à Howald</span></li>
+      </ul>
+      ${link('Qui nous sommes', '/a-propos/')}
     </div>
   </div>
   <div class="container g-units__grid">
@@ -88,7 +94,7 @@ export default {
       </div>
       <div class="unit__body">
         ${logo('services', 'NCIEC Services', 'unit__logo')}
-        <h2 class="unit__title">Nettoyage et facility services</h2>
+        <h3 class="unit__title">Nettoyage et facility services</h3>
         <p class="unit__lead">Bureaux, vitres, façades, extérieurs et interventions spécialisées pour les entreprises, les institutions, les copropriétés et les particuliers.</p>
         ${checklist(['Entretien de bureaux et de bâtiments', 'Vitres, façades et toitures', 'Extérieurs, espaces verts et service hiver', 'Fin de chantier et facility services'])}
         <p class="unit__extra">${link('Demander un devis', devis(''))}</p>
@@ -103,7 +109,7 @@ export default {
       </div>
       <div class="unit__body">
         ${logo('electro', 'NCIEC Electro', 'unit__logo')}
-        <h2 class="unit__title">Électroménager et équipement</h2>
+        <h3 class="unit__title">Électroménager et équipement</h3>
         <p class="unit__lead">Des milliers de références des grandes marques, pour la maison comme pour les professionnels, avec les services d\u2019installation.</p>
         ${checklist(['Gros électroménager et appareils encastrables', 'Cuisine et ménage, TV et audio, traitement de l\u2019air', 'Gamme professionnelle et outillage', 'Livraison et installation'])}
         <p class="unit__extra"><a class="text-link" href="${ELECTRO.phoneHref}">${icon('phone', 'icon icon--sm')}${ELECTRO.phone}</a></p>
@@ -113,23 +119,6 @@ export default {
 
   </div>
   <div class="container">${note('Pas encore de photo pour NCIEC Electro : la carte utilise une illustration. À remplacer par une photo réelle du showroom ou de l\u2019équipe (pas de banque d\u2019images).', 'info')}</div>
-</section>
-
-<section class="section" aria-labelledby="groupe-t">
-  <div class="container split">
-    <div class="split__text">
-      ${eyebrow('Le groupe')}
-      <h2 id="groupe-t">Une entreprise luxembourgeoise, deux savoir-faire</h2>
-      <p class="lead">Depuis ${ph('année')}, NCIEC entretient et équipe des bâtiments au Luxembourg. Nos équipes interviennent sur site pour le nettoyage et les facility services ; notre boutique conseille, livre et installe l’équipement.</p>
-      <ul class="g-facts" role="list">
-        <li><strong>2</strong><span>activités complémentaires</span></li>
-        <li><strong>${ph('X')}</strong><span>collaborateurs</span></li>
-        <li><strong>1</strong><span>site à Howald</span></li>
-      </ul>
-      ${link('Qui nous sommes', '/a-propos/')}
-    </div>
-    <div class="split__media">${img('gestion-dechets', 'Deux collaborateurs NCIEC en tenue haute visibilité')}</div>
-  </div>
 </section>
 
 <section class="section section--navy g-careers" aria-labelledby="carrieres-t">

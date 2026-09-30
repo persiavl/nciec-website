@@ -792,3 +792,10 @@ body:has(.hero) .review-toggle { bottom: 84px; }
 @media (max-width: 760px) { .g-bars { grid-template-columns: 1fr; gap: 12px; padding-bottom: 72px; } .g-bar { min-height: 72px; } }
 /* landing: bars occupy the lower hero, pause button sits bottom-left → review button bottom-right */
 body:has(.g-vhero) .review-toggle { left: auto; right: 16px; bottom: 16px; }
+
+/* landing: combined "Le groupe" + business cards section */
+.g-intro { display: grid; grid-template-columns: 1fr 1.1fr; gap: 24px 64px; align-items: start; margin-bottom: clamp(36px, 5vw, 64px); }
+.g-intro h2 { margin: 0; }
+.g-intro__side .lead { margin-bottom: 20px; }
+.g-intro .g-facts { margin: 0 0 18px; }
+@media (max-width: 860px) { .g-intro { grid-template-columns: 1fr; } }
