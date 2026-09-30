@@ -712,3 +712,51 @@ body:has(.hero) .review-toggle { bottom: 84px; }
   .unit__art { width: 62%; margin-top: -34px; }
   .unit__brands { font-size: .66rem; bottom: 10px; }
 }
+
+/* ---------- landing: "door" cards ---------- */
+.unit { position: relative; }
+.unit .checklist { margin-bottom: 1.2em; }
+.unit__extra { margin: auto 0 0; position: relative; z-index: 2; }
+.door { display: flex; align-items: center; gap: 18px; padding: 20px clamp(24px, 3vw, 36px); border-top: 1px solid var(--line); background: var(--mist); color: var(--navy); text-decoration: none; transition: background-color .35s var(--ease), color .35s var(--ease); }
+.door::after { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: inherit; } /* whole card is the click target */
+.door:hover { color: #fff; }
+.door:focus-visible { outline: none; }
+.door:focus-visible::after { outline: 3px solid var(--blue); outline-offset: 4px; }
+.door__text { display: grid; gap: 2px; flex: 1; min-width: 0; }
+.door__text strong { font: 700 clamp(1rem, 1.4vw, 1.12rem)/1.25 var(--font-head); letter-spacing: -.01em; }
+.door__text small { font-size: .85rem; color: var(--muted); font-variant-numeric: tabular-nums; transition: color .35s; }
+.door__arrow { flex: none; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: var(--blue-600); color: #fff; transition: transform .35s var(--ease), background-color .35s, color .35s; }
+.door__arrow .icon { width: 20px; height: 20px; }
+
+/* the little door: yellow light behind a leaf that swings open */
+.door__frame { flex: none; position: relative; width: 30px; height: 40px; border: 2px solid currentColor; border-bottom: 0; border-radius: 4px 4px 0 0; background: var(--accent); perspective: 90px; box-shadow: 0 0 0 0 rgb(255 210 63 / 0); transition: box-shadow .45s var(--ease); }
+.door__leaf { position: absolute; inset: 0; background: var(--blue-600); transform-origin: left center; transition: transform .55s cubic-bezier(.3, 1.3, .5, 1); }
+.door__leaf::after { content: ''; position: absolute; right: 4px; top: 50%; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); }
+
+.unit:hover .door, .door:focus-visible { background: var(--navy); color: #fff; }
+.unit:hover .door__text small, .door:focus-visible .door__text small { color: #CFE0EE; }
+.unit:hover .door__arrow, .door:focus-visible .door__arrow { background: var(--accent); color: var(--navy); transform: translateX(4px); }
+.unit:hover .door__leaf, .door:focus-visible .door__leaf { transform: rotateY(-72deg); }
+.unit:hover .door__frame, .door:focus-visible .door__frame { box-shadow: 0 0 22px 2px rgb(255 210 63 / .45); }
+.unit--electro:hover .door__arrow { transform: translate(3px, -3px); }
+
+/* cards rise in on load */
+@media (prefers-reduced-motion: no-preference) {
+  .unit { animation: unit-in .8s var(--ease) both; }
+  .unit--electro { animation-delay: .12s; }
+  @keyframes unit-in { from { transform: translateY(32px); opacity: .2; } }
+}
+
+/* ---------- redirect transition ---------- */
+.door-portal { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 24px; color: #fff; background: var(--portal-bg, var(--navy)); clip-path: circle(0 at var(--x, 50%) var(--y, 50%)); transition: clip-path .65s cubic-bezier(.7, 0, .2, 1); }
+.door-portal--services { --portal-bg: var(--blue-600); }
+.door-portal--electro { --portal-bg: var(--navy); }
+.door-portal.is-open { clip-path: circle(150vmax at var(--x, 50%) var(--y, 50%)); }
+.door-portal__inner { display: grid; gap: 18px; justify-items: center; text-align: center; opacity: 0; transform: translateY(10px); transition: opacity .3s .3s, transform .4s .3s var(--ease); }
+.door-portal.is-open .door-portal__inner { opacity: 1; transform: none; }
+.door-portal svg { width: 200px; height: auto; --lg-main: #fff; --lg-soft: var(--ice); }
+.door-portal p { margin: 0; font-size: 1.05rem; color: rgb(255 255 255 / .85); }
+.door-portal strong { display: block; font: 700 1.3rem/1.3 var(--font-head); color: #fff; }
+.door-portal__bar { width: 180px; height: 4px; border-radius: 4px; background: rgb(255 255 255 / .2); overflow: hidden; }
+.door-portal__bar::after { content: ''; display: block; height: 100%; width: 0; background: var(--accent); border-radius: 4px; }
+.door-portal.is-open .door-portal__bar::after { width: 100%; transition: width .75s .15s linear; }

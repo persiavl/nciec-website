@@ -250,3 +250,39 @@
   /* ---------- misc ---------- */
   $$('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
 })();
+
+/* ---------- landing: door cards → animated redirect ---------- */
+(() => {
+  const doors = document.querySelectorAll('[data-door]');
+  if (!doors.length) return;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  doors.forEach((door) => door.addEventListener('click', (e) => {
+    // Let the browser handle new-tab / new-window clicks and reduced motion.
+    if (reduce || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+
+    const tone = door.dataset.doorTone;
+    const card = door.closest('.unit').getBoundingClientRect();
+    // Keyboard activation reports 0/0 — start from the card centre instead.
+    const x = e.clientX || card.left + card.width / 2;
+    const y = e.clientY || card.top + card.height / 2;
+
+    const portal = document.createElement('div');
+    portal.className = `door-portal door-portal--${tone}`;
+    portal.setAttribute('role', 'status');
+    portal.style.setProperty('--x', `${x}px`);
+    portal.style.setProperty('--y', `${y}px`);
+    portal.innerHTML = `<div class="door-portal__inner">
+      <svg viewBox="0 0 391 139" aria-hidden="true"><use href="#logo-${tone}"/></svg>
+      <p>Redirection vers<strong>${door.dataset.doorDomain}</strong></p>
+      <span class="door-portal__bar"></span>
+    </div>`;
+    document.body.appendChild(portal);
+    requestAnimationFrame(() => requestAnimationFrame(() => portal.classList.add('is-open')));
+    setTimeout(() => { location.href = door.href; }, 900);
+  }));
+
+  // Coming back with the browser's Back button restores the page from cache: remove the overlay.
+  addEventListener('pageshow', () => document.querySelectorAll('.door-portal').forEach((p) => p.remove()));
+})();

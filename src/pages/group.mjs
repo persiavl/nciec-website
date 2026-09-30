@@ -9,6 +9,15 @@ const appliances = `
   <path d="M8 182h344" opacity=".35"/>
 </svg>`;
 
+/** Full-width "door" at the bottom of a business card. Its ::after stretches over the whole card. */
+const door = ({ href, label, domain, tone, external }) => `
+<a class="door" href="${href}" data-door data-door-tone="${tone}" data-door-domain="${domain}">
+  <span class="door__frame" aria-hidden="true"><span class="door__leaf"></span></span>
+  <span class="door__text"><strong>${label}</strong><small>${domain}${external ? ' · autre site' : ''}</small></span>
+  <span class="door__arrow" aria-hidden="true">${icon(external ? 'external' : 'arrow')}</span>
+</a>`;
+
+
 export default {
   path: '/',
   variant: 'group',
@@ -44,40 +53,36 @@ export default {
   <div class="container g-units__grid">
 
     <article class="unit unit--services">
-      <a class="unit__media" href="/services/" tabindex="-1" aria-hidden="true">
+      <div class="unit__media">
         ${img('facade-cordistes', '', { eager: true })}
-      </a>
+      </div>
       <div class="unit__body">
         ${logo('services', 'NCIEC Services', 'unit__logo')}
         <h2 class="unit__title">Nettoyage et facility services</h2>
         <p class="unit__lead">Bureaux, vitres, façades, extérieurs et interventions spécialisées pour les entreprises, les institutions, les copropriétés et les particuliers.</p>
         ${checklist(['Entretien de bureaux et de bâtiments', 'Vitres, façades et toitures', 'Extérieurs, espaces verts et service hiver', 'Fin de chantier et facility services'])}
-        <div class="unit__actions">
-          ${btn('Découvrir NCIEC Services', '/services/', 'primary')}
-          ${link('Demander un devis', devis(''))}
-        </div>
+        <p class="unit__extra">${link('Demander un devis', devis(''))}</p>
       </div>
+      ${door({ href: '/services/', label: 'Entrer sur NCIEC Services', domain: 'nciec.lu/services', tone: 'services', external: false })}
     </article>
 
     <article class="unit unit--electro">
-      <a class="unit__media unit__media--art" href="${ELECTRO.url}" tabindex="-1" aria-hidden="true">
+      <div class="unit__media unit__media--art">
         ${appliances}
         <span class="unit__brands">${ELECTRO.brands.slice(0, 6).join(' · ')}</span>
-      </a>
+      </div>
       <div class="unit__body">
         ${logo('electro', 'NCIEC Electro', 'unit__logo')}
         <h2 class="unit__title">Électroménager et équipement</h2>
-        <p class="unit__lead">Des milliers de références des grandes marques, pour la maison comme pour les professionnels, avec les services d’installation.</p>
-        ${checklist(['Gros électroménager et appareils encastrables', 'Cuisine et ménage, TV et audio, traitement de l’air', 'Gamme professionnelle et outillage', 'Livraison et installation'])}
-        <div class="unit__actions">
-          <a class="btn btn--primary" href="${ELECTRO.url}" target="_blank" rel="noopener">Visiter la boutique NCIEC Electro${icon('external')}<span class="sr-only"> (nouvel onglet)</span></a>
-          <a class="text-link" href="${ELECTRO.phoneHref}">${ELECTRO.phone}${icon('arrow')}</a>
-        </div>
+        <p class="unit__lead">Des milliers de références des grandes marques, pour la maison comme pour les professionnels, avec les services d\u2019installation.</p>
+        ${checklist(['Gros électroménager et appareils encastrables', 'Cuisine et ménage, TV et audio, traitement de l\u2019air', 'Gamme professionnelle et outillage', 'Livraison et installation'])}
+        <p class="unit__extra"><a class="text-link" href="${ELECTRO.phoneHref}">${icon('phone', 'icon icon--sm')}${ELECTRO.phone}</a></p>
       </div>
+      ${door({ href: ELECTRO.url, label: 'Entrer dans la boutique NCIEC Electro', domain: 'nciecsales.lu', tone: 'electro', external: true })}
     </article>
 
   </div>
-  <div class="container">${note('Pas encore de photo pour NCIEC Electro : la carte utilise une illustration. À remplacer par une photo réelle du showroom ou de l’équipe (pas de banque d’images).', 'info')}</div>
+  <div class="container">${note('Pas encore de photo pour NCIEC Electro : la carte utilise une illustration. À remplacer par une photo réelle du showroom ou de l\u2019équipe (pas de banque d\u2019images).', 'info')}</div>
 </section>
 
 <section class="section" aria-labelledby="groupe-t">
