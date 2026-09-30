@@ -54,7 +54,7 @@ ${block({
 ${ctaBand({
   title: 'Des vitres nettes, à la bonne fréquence',
   text: 'Nous passons voir le bâtiment, évaluons l’exposition et les accès, puis chiffrons.',
-  cta: btn('Demander un devis gratuit', devis(P), 'mint'),
+  cta: btn('Demander un devis gratuit', devis(P), 'accent'),
 })}
 ${related('vitres')}
 `,

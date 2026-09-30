@@ -53,7 +53,7 @@ ${pageHero({
 ${ctaBand({
   title: 'Votre bâtiment pourrait être le prochain cas',
   text: 'Visite sur site gratuite, offre détaillée par zone et par fréquence.',
-  cta: btn('Demander un devis gratuit', devis(''), 'mint'),
+  cta: btn('Demander un devis gratuit', devis(''), 'accent'),
 })}
 `,
 };

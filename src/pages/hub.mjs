@@ -69,7 +69,7 @@ ${pageHero({
 ${ctaBand({
   title: 'Plusieurs besoins, un seul contrat',
   text: 'Nous visitons le site, relevons les surfaces et remettons une offre détaillée par zone et par fréquence — sans engagement.',
-  cta: btn('Demander un devis gratuit', devis(''), 'mint'),
+  cta: btn('Demander un devis gratuit', devis(''), 'accent'),
 })}
 `,
 };

@@ -79,7 +79,7 @@ ${block({
 ${ctaBand({
   title: 'Un besoin qui sort de l’ordinaire ?',
   text: 'Décrivez la situation : nous revenons vers vous avec une solution et un délai.',
-  cta: btn('Demander une intervention', devis(P), 'mint'),
+  cta: btn('Demander une intervention', devis(P), 'accent'),
 })}
 ${related(P)}
 `,

@@ -79,7 +79,7 @@ ${block({
 ${ctaBand({
   title: 'Un intérieur entretenu, sans y penser',
   text: 'Dites-nous ce dont vous avez besoin et à quelle fréquence.',
-  cta: btn('Demander un devis gratuit', devis(P), 'mint'),
+  cta: btn('Demander un devis gratuit', devis(P), 'accent'),
 })}
 `,
 };

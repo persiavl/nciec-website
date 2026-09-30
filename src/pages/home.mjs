@@ -33,7 +33,7 @@ export default {
     <h1 id="hero-title">Nettoyage et facility services <span class="nowrap">au Luxembourg</span></h1>
     <p class="hero__lead">Des bâtiments propres, des extérieurs entretenus, un interlocuteur unique. Nous intervenons chez les entreprises, les institutions et les copropriétés partout au Grand-Duché.</p>
     <div class="btn-row">
-      ${btn('Demander un devis gratuit', devis(''), 'mint')}
+      ${btn('Demander un devis gratuit', devis(''), 'accent')}
       ${btn('Voir nos solutions', '/nos-solutions/', 'ghost-light')}
     </div>
   </div>
@@ -152,7 +152,7 @@ export default {
 ${ctaBand({
   title: 'Parlons de votre bâtiment',
   text: `Décrivez-nous vos surfaces et vos contraintes. Nous vous rappelons sous ${ph('24 h')} et proposons une visite sur site gratuite avant tout chiffrage.`,
-  cta: btn('Demander un devis gratuit', devis(''), 'mint'),
+  cta: btn('Demander un devis gratuit', devis(''), 'accent'),
   secondary: `<a class="btn btn--ghost-light" href="${SITE.phoneHref}">${icon('phone')}${SITE.phone}</a>`,
 })}
 `,

@@ -40,7 +40,7 @@ ${block({
 ${ctaBand({
   title: 'Compléter votre contrat existant',
   text: 'Indiquez votre site et la prestation souhaitée : nous l’intégrons au plan d’intervention.',
-  cta: btn('Ajouter une prestation à mon contrat', devis('complementaires'), 'mint'),
+  cta: btn('Ajouter une prestation à mon contrat', devis('complementaires'), 'accent'),
 })}
 `,
 };

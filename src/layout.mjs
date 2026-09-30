@@ -203,7 +203,7 @@ function footer() {
     <div class="site-footer__brand">
       <img src="/assets/img/logo-nciec-white.svg" alt="NCIEC Services" width="150" height="53">
       <p>NCIEC Services entretient les bâtiments, les extérieurs et les espaces de travail au Luxembourg : nettoyage, hygiène, facility services et services aux particuliers. Équipes formées, interventions planifiées, interlocuteur unique.</p>
-      ${btn('Demander un devis gratuit', devis(''), 'mint')}
+      ${btn('Demander un devis gratuit', devis(''), 'accent')}
     </div>
     <nav aria-label="Solutions">
       <p class="site-footer__title">Solutions</p>
@@ -263,7 +263,7 @@ ${noindex ? '<meta name="robots" content="noindex">' : ''}
 <meta property="og:description" content="${description}">
 <meta property="og:url" content="${canonical}">
 <meta property="og:image" content="${SITE.url}${ogImage}">
-<meta name="theme-color" content="#0B2540">
+<meta name="theme-color" content="#0E2233">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/plus-jakarta-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>

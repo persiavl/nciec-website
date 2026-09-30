@@ -63,7 +63,7 @@ ${block({
 ${ctaBand({
   title: 'Votre date de réception approche ?',
   text: 'Indiquez-nous la surface, le type de chantier et la date butoir.',
-  cta: btn('Demander un devis gratuit', devis(P), 'mint'),
+  cta: btn('Demander un devis gratuit', devis(P), 'accent'),
 })}
 ${related(P)}
 `,

@@ -79,7 +79,7 @@ ${block({
 ${ctaBand({
   title: 'Demander une offre',
   text: 'Chaque bâtiment est différent. Nous visitons le site, relevons les surfaces et remettons une offre détaillée par zone et par fréquence — sans engagement.',
-  cta: btn('Demander un devis gratuit', devis(P), 'mint'),
+  cta: btn('Demander un devis gratuit', devis(P), 'accent'),
 })}
 </div>
 ${related(P)}

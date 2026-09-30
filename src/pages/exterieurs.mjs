@@ -48,7 +48,7 @@ ${block({
       <h2 id="hiver-t">Service hiver</h2>
       <p>Dès que le verglas arrive, les délais comptent — et la responsabilité du propriétaire est engagée sur les accès. Nos équipes sont mobilisables 24h/24 et 7j/7 pour le déneigement manuel et mécanique et le salage des entrées, trottoirs, escaliers, rampes et parkings.</p>
       <p class="deadline">${icon('clock', 'icon icon--sm')}<span>Le contrat hiver se cale avant ${ph('octobre')} : passé cette date, les créneaux se réduisent.</span></p>
-      ${btn('Réserver un contrat service hiver', devis(P, 'service-hiver'), 'mint')}
+      ${btn('Réserver un contrat service hiver', devis(P, 'service-hiver'), 'accent')}
     </div>
     <div class="split__aside">
       <ul class="winter-list" role="list">
@@ -64,7 +64,7 @@ ${block({
 ${ctaBand({
   title: 'Un contrat annuel pour tous vos extérieurs',
   text: 'Espaces verts l’été, déneigement l’hiver, déchets et balayage toute l’année.',
-  cta: btn('Demander un devis gratuit', devis(P), 'mint'),
+  cta: btn('Demander un devis gratuit', devis(P), 'accent'),
 })}
 ${related(P)}
 `,

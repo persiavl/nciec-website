@@ -31,7 +31,7 @@ ${pageHero({
     </div>
     <div class="value-grid">
       <article class="value reveal"><span class="value__icon">${icon('scale')}</span><h3>Intégrité</h3><p>Transparence sur ce que nous facturons, respect des engagements pris et des législations applicables. Ce qui est écrit au contrat est ce qui est exécuté sur site.</p></article>
-      <article class="value value--mint reveal"><span class="value__icon">${icon('leaf')}</span><h3>Responsabilité environnementale</h3><p>Produits et méthodes choisis pour limiter l’impact : dosage contrôlé, réduction des consommations d’eau, tri systématique des déchets d’intervention. Notre certification ISO 14001 encadre ces choix et les fait auditer.</p></article>
+      <article class="value value--accent reveal"><span class="value__icon">${icon('leaf')}</span><h3>Responsabilité environnementale</h3><p>Produits et méthodes choisis pour limiter l’impact : dosage contrôlé, réduction des consommations d’eau, tri systématique des déchets d’intervention. Notre certification ISO 14001 encadre ces choix et les fait auditer.</p></article>
       <article class="value reveal"><span class="value__icon">${icon('users')}</span><h3>Responsabilité sociale</h3><p>Personnel déclaré, formé et encadré. Sécurité au travail, diversité, conditions d’emploi stables. Dans un secteur où la sous-traitance en cascade est courante, nous intervenons avec nos propres équipes.</p></article>
     </div>
   </div>
@@ -66,7 +66,7 @@ ${pageHero({
 
 ${ctaBand({
   title: 'Envie de travailler avec nous — ou chez nous ?',
-  cta: btn('Nous rencontrer', '/contact/', 'mint'),
+  cta: btn('Nous rencontrer', '/contact/', 'accent'),
   secondary: btn('Voir les offres d’emploi', '/carrieres/', 'ghost-light'),
 })}
 `,
