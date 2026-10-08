@@ -844,7 +844,7 @@ body:has(.g-vhero) .review-toggle { left: auto; right: 16px; bottom: 16px; }
 /* ---------- certification cards (same structure for certificates and labels) ---------- */
 .cert-cards { list-style: none; margin: 0 0 40px; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .cert-card { display: flex; flex-direction: column; padding: 22px; border-radius: var(--radius); background: #fff; border: 1px solid var(--line); color: var(--text); }
-.cert-card__mark { height: 84px; display: flex; align-items: center; margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+.cert-card__mark { height: 84px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
 .cert-card__mark img { max-height: 64px; max-width: 100%; width: auto; object-fit: contain; }
 .cert-card__name { font-size: 1.05rem; margin: 0 0 4px; color: var(--navy); }
 .cert-card__scope { margin: 0 0 18px; font-size: .9rem; line-height: 1.45; color: var(--muted); }
