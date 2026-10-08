@@ -1,11 +1,4 @@
-import { icon, ELECTRO, ph, note, btn, link, pageHero, ctaBand, eyebrow, logo, breadcrumbLd, GROUP_ROOT } from '../layout.mjs';
-
-const certs = [
-  ['ISO 9001', 'Management de la qualité'],
-  ['ISO 14001', 'Management environnemental'],
-  [ph('SDK'), ph('à compléter')],
-  [ph('ESR'), 'Entreprise Socialement Responsable'],
-];
+import { icon, ELECTRO, ph, note, btn, link, pageHero, ctaBand, eyebrow, logo, breadcrumbLd, GROUP_ROOT, certCards } from '../layout.mjs';
 
 export default {
   path: '/a-propos/',
@@ -60,13 +53,9 @@ ${pageHero({
 <section class="section section--tint" aria-labelledby="certif-t">
   <div class="container">
     <h2 id="certif-t">Certifications</h2>
-    <div class="table-wrap">
-      <table class="data-table">
-        <thead><tr><th scope="col">Certification</th><th scope="col">Portée</th><th scope="col">N° / Organisme</th><th scope="col">Validité</th></tr></thead>
-        <tbody>${certs.map(([c, p]) => `<tr><th scope="row">${c}</th><td>${p}</td><td>${ph('à compléter')}</td><td>${ph('à compléter')}</td></tr>`).join('')}</tbody>
-      </table>
-    </div>
-    ${note('Préciser pour chaque certification l’entité couverte (NCIEC Services, NCIEC Electro ou les deux). Afficher un logo sans numéro ni organisme n’apporte rien à un acheteur professionnel — et se remarque dans un appel d’offres. Ce tableau doit être complété avant mise en ligne.')}
+    <p class="lead certif-lead">Nos certifications imposent des procédures écrites, des audits réguliers et un suivi des incidents. Les numéros et organismes sont indiqués pour vos appels d’offres.</p>
+    ${certCards()}
+    ${note('Numéros et organismes fournis par le client (10/2026). Encore à préciser : dates de validité, et l’entité couverte (NCIEC Services, NCIEC Electro ou les deux). Option : proposer les certificats en PDF à télécharger.', 'info')}
   </div>
 </section>
 

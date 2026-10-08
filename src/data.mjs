@@ -24,6 +24,14 @@ export const ELECTRO = {
   brands: ['Bosch', 'Siemens', 'Samsung', 'LG', 'Liebherr', 'Smeg', 'Electrolux', 'Dyson', 'Makita', 'Nilfisk'],
 };
 
+// Certifications and labels (data from the client, 10/2026). Labels have no certificate number by nature.
+export const CERTS = [
+  { key: 'iso-9001', name: 'ISO 9001:2015', scope: 'Management de la qualité', body: 'ESCEM', number: '900 370', alt: 'Marque ESCEM Management System ISO 9001 certifié' },
+  { key: 'iso-14001', name: 'ISO 14001:2015', scope: 'Management environnemental', body: 'ESCEM', number: '1400 370', alt: 'Marque ESCEM Management System ISO 14001 certifié' },
+  { key: 'esr', name: 'Entreprise Responsable (RSE)', scope: 'Stratégie RSE : gouvernance, social, environnement', body: 'INDR', alt: 'Label ESR Entreprise Responsable' },
+  { key: 'sdk', name: 'SuperDrecksKëscht fir Betriber', scope: 'Gestion écologique des déchets', body: 'SDK', alt: 'Label SuperDrecksKëscht fir Betriber' },
+];
+
 // Client logos (taken from the current nciec.lu banner). Files: assets/img/clients/<key>-mono.png and -color.png
 export const CLIENTS = [
   { key: 'degroof-petercam', name: 'Degroof Petercam' },

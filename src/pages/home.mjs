@@ -1,4 +1,4 @@
-import { icon, SITE, SOLUTIONS, devis, ph, note, btn, link, img, eyebrow, ctaBand, clientLogos } from '../layout.mjs';
+import { icon, SITE, SOLUTIONS, devis, ph, note, btn, link, img, eyebrow, ctaBand, clientLogos, certCards } from '../layout.mjs';
 
 export default {
   path: '/services/',
@@ -117,12 +117,7 @@ export default {
       </div>
       <blockquote class="pull">Nos certifications ne sont pas un décor : elles imposent des procédures écrites, des audits réguliers et un suivi des incidents. C'est ce qui rend une prestation reproductible d'un mois sur l'autre.</blockquote>
     </div>
-    <ul class="cert-grid" role="list">
-      <li class="cert"><span class="cert__badge">ISO<br>9001</span><div><strong>Management de la qualité</strong><small>${ph('n° de certificat, organisme')}</small></div></li>
-      <li class="cert"><span class="cert__badge">ISO<br>14001</span><div><strong>Management environnemental</strong><small>${ph('n° de certificat, organisme')}</small></div></li>
-      <li class="cert"><span class="cert__badge">SDK</span><div><strong>${ph('Intitulé SDK')}</strong><small>${ph('n° de certificat, organisme')}</small></div></li>
-      <li class="cert"><span class="cert__badge">ESR</span><div><strong>Entreprise Socialement Responsable</strong><small>${ph('n° de certificat, organisme')}</small></div></li>
-    </ul>
+    ${certCards()}
     <p>${btn('En savoir plus sur nos engagements', '/a-propos/', 'ghost-light')}</p>
   </div>
 </section>

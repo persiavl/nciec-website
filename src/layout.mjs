@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { icon } from './icons.mjs';
-import { SITE, SOLUTIONS, ELECTRO, CLIENTS, devis } from './data.mjs';
+import { SITE, SOLUTIONS, ELECTRO, CLIENTS, CERTS, devis } from './data.mjs';
 
 export { icon, SITE, SOLUTIONS, ELECTRO, devis };
 
@@ -81,6 +81,26 @@ export function clientLogos({ heading = 'Ils nous font confiance', more = '' } =
   </div>
   ${more}
 </div>`;
+}
+
+/**
+ * Certification cards. Every card has the same structure: mark, name, scope, issuer, credential pill.
+ * Certificates show their number in the pill; labels (no number by nature) show "Label attribué".
+ */
+export function certCards() {
+  return `<ul class="cert-cards" role="list">${CERTS.map((c) => `
+  <li class="cert-card">
+    <div class="cert-card__mark"><img src="/assets/img/certs/${c.key}.png" alt="${c.alt}" loading="lazy" decoding="async"></div>
+    <h3 class="cert-card__name">${c.name}</h3>
+    <p class="cert-card__scope">${c.scope}</p>
+    <div class="cert-card__foot">
+      <span class="cert-card__body">Délivré par <strong>${c.body}</strong></span>
+      ${c.number
+        ? `<span class="cert-pill cert-pill--cert">Certificat n° <strong>${c.number}</strong></span>`
+        : `<span class="cert-pill cert-pill--label">${icon('check', 'icon icon--xs')}Label attribué</span>`}
+    </div>
+  </li>`).join('')}
+</ul>`;
 }
 
 export const SERVICES_ROOT ={ label: 'NCIEC Services', href: '/services/' };
@@ -291,7 +311,7 @@ function footer() {
         <a href="${SITE.phoneHref}">${icon('phone', 'icon icon--xs')}${SITE.phone}</a>
         <a href="mailto:${SITE.email}">${icon('mail', 'icon icon--xs')}${SITE.email}</a>
       </p>
-      <p class="site-footer__certs"><span>ISO 9001</span><span>ISO 14001</span><span>ESR</span></p>
+      <p class="site-footer__certs"><span>ISO 9001</span><span>ISO 14001</span><span>ESR</span><span>SDK</span></p>
     </div>
   </div>
   <div class="container site-footer__bottom">
