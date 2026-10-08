@@ -2,6 +2,7 @@
 import { mkdir, writeFile, readFile, cp, rm } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 import { layout, SITE } from './src/layout.mjs';
 
 import group from './src/pages/group.mjs';
@@ -31,6 +32,12 @@ const BASE = (process.env.BASE_PATH || '').replace(/\/$/, '');
 const DEMO = process.env.DEMO === '1';
 const withBase = (html) => (BASE ? html.replace(/\b(href|src|poster|data-src-[a-z]+)="\/(?!\/)/g, `$1="${BASE}/`) : html);
 
+// Cache busting: GitHub Pages lets browsers keep CSS/JS for 10 min, so a new page could load with an old stylesheet.
+// Each link gets a fingerprint of the file's content; any change to the file changes its URL.
+const fingerprint = async (rel) => createHash('sha1').update(await readFile(join(root, 'public', rel))).digest('hex').slice(0, 10);
+const ASSET_VERSIONS = { '/assets/css/main.css': await fingerprint('assets/css/main.css'), '/assets/js/main.js': await fingerprint('assets/js/main.js') };
+const versionAssets = (html) => Object.entries(ASSET_VERSIONS).reduce((h, [path, v]) => h.split(`"${path}"`).join(`"${path}?v=${v}"`), html);
+
 const pages = [group, home, hub, batiments, vitres, chantier, exterieurs, facades, facility, transverses, particuliers, references, aPropos, carrieres, contact, ...misc];
 
 // 301 map from the copy deck annex (old URL → new URL).
@@ -49,7 +56,7 @@ await rm(out, { recursive: true, force: true });
 await cp(join(root, 'public'), out, { recursive: true });
 
 for (const p of pages) {
-  const html = withBase(layout({ ...p, noindex: p.noindex || DEMO, body: p.body() }));
+  const html = withBase(versionAssets(layout({ ...p, noindex: p.noindex || DEMO, body: p.body() })));
   const file = p.file ? join(out, p.file) : join(out, p.path, 'index.html');
   await mkdir(dirname(file), { recursive: true });
   await writeFile(file, html);
