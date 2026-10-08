@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { icon } from './icons.mjs';
-import { SITE, SOLUTIONS, ELECTRO, devis } from './data.mjs';
+import { SITE, SOLUTIONS, ELECTRO, CLIENTS, devis } from './data.mjs';
 
 export { icon, SITE, SOLUTIONS, ELECTRO, devis };
 
@@ -48,7 +48,33 @@ export const slugify = (s) =>
 
 // ---------- page-level components ----------
 
-export const SERVICES_ROOT = { label: 'NCIEC Services', href: '/services/' };
+/**
+ * Client logo strip, used on the landing page, the services home and Références.
+ * All logos are unified to one slate colour; hover/focus reveals the original colours.
+ * Each logo gets the same visual area instead of the same height, so wide and compact marks look equally heavy.
+ */
+const pngSize = (file) => {
+  const b = readFileSync(new URL(`../public/assets/img/clients/${file}`, import.meta.url));
+  return [b.readUInt32BE(16), b.readUInt32BE(20)];
+};
+export function clientLogos({ heading = 'Ils nous font confiance', more = '' } = {}) {
+  const items = CLIENTS.map((c) => {
+    const [w, h] = pngSize(`${c.key}-mono.png`);
+    const height = Math.round(Math.min(54, Math.max(28, Math.sqrt(4800 / (w / h)))));
+    return `<li class="client" style="--h:${height}px">
+      <img class="client__mono" src="/assets/img/clients/${c.key}-mono.png" alt="${c.name}" width="${w}" height="${h}" loading="lazy" decoding="async">
+      <img class="client__color" src="/assets/img/clients/${c.key}-color.png" alt="" width="${w}" height="${h}" loading="lazy" decoding="async" aria-hidden="true">
+    </li>`;
+  }).join('');
+  return `
+<div class="clients">
+  ${heading ? `<p class="clients__heading">${heading}</p>` : ''}
+  <ul class="clients__list" role="list">${items}</ul>
+  ${more}
+</div>`;
+}
+
+export const SERVICES_ROOT ={ label: 'NCIEC Services', href: '/services/' };
 export const GROUP_ROOT = { label: 'Accueil', href: '/' };
 
 export function pageHero({ crumbs = [], title, chapeau, cta, image, alt, eyebrowText, root = SERVICES_ROOT }) {

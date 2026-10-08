@@ -1,4 +1,4 @@
-import { icon, SITE, SOLUTIONS, devis, ph, note, btn, link, img, eyebrow, ctaBand } from '../layout.mjs';
+import { icon, SITE, SOLUTIONS, devis, ph, note, btn, link, img, eyebrow, ctaBand, clientLogos } from '../layout.mjs';
 
 export default {
   path: '/services/',
@@ -133,10 +133,9 @@ export default {
       ${eyebrow('Références')}
       <h2 id="confiance">Ils nous font confiance</h2>
     </div>
-    ${note('Logos clients et témoignages à collecter. <strong>Accord écrit de chaque client requis</strong> avant affichage d’un logo (point 4 de la liste de décisions).')}
-    <ul class="logo-wall" role="list" aria-label="Logos clients (à venir)">
-      ${Array.from({ length: 6 }, () => `<li>${ph('Logo client')}</li>`).join('')}
-    </ul>
+    ${clientLogos({ heading: '' })}
+    ${note('Logos repris du site actuel nciec.lu. Confirmer l’<strong>accord écrit</strong> de chaque client et demander une version haute définition du logo IL Cosmetics (le fichier actuel fait 171 px de large).')}
+    ${note('Témoignages à collecter auprès de 2 ou 3 de ces clients.', 'info')}
     <div class="testimonials">
       ${[1, 2, 3].map(() => `
       <figure class="testimonial">

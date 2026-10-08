@@ -24,6 +24,16 @@ export const ELECTRO = {
   brands: ['Bosch', 'Siemens', 'Samsung', 'LG', 'Liebherr', 'Smeg', 'Electrolux', 'Dyson', 'Makita', 'Nilfisk'],
 };
 
+// Client logos (taken from the current nciec.lu banner). Files: assets/img/clients/<key>-mono.png and -color.png
+export const CLIENTS = [
+  { key: 'degroof-petercam', name: 'Degroof Petercam' },
+  { key: 'mileway', name: 'Mileway' },
+  { key: 'seo', name: 'SEO' },
+  { key: 'revantage', name: 'Revantage' },
+  { key: 'sidero', name: 'Sidero' },
+  { key: 'il-cosmetics', name: 'IL Cosmetics Group' },
+];
+
 // B2B solutions — one source for the home grid, the hub, the mega menu and the related-links rail.
 export const SOLUTIONS = [
   {

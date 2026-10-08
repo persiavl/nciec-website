@@ -1,4 +1,4 @@
-import { icon, SITE, ELECTRO, devis, ph, note, btn, link, img, eyebrow, checklist, logo, GROUP_ROOT } from '../layout.mjs';
+import { icon, SITE, ELECTRO, devis, ph, note, btn, link, img, eyebrow, checklist, logo, GROUP_ROOT, clientLogos } from '../layout.mjs';
 
 // Simple line illustration for the Electro card (no product photos available yet).
 const appliances = `
@@ -68,6 +68,12 @@ export default {
     <span class="video-toggle__pause">${icon('pause', 'icon icon--sm')}<span class="sr-only">Mettre la vidéo en pause</span></span>
     <span class="video-toggle__play">${icon('play', 'icon icon--sm')}<span class="sr-only">Lire la vidéo</span></span>
   </button>
+</section>
+
+<section class="clients-band" aria-label="Clients">
+  <div class="container">
+    ${clientLogos({ more: link('Nos références', '/references/') })}
+  </div>
 </section>
 
 <section class="section g-units" id="activites" aria-labelledby="activites-t">

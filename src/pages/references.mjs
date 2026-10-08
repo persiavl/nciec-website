@@ -1,4 +1,4 @@
-import { icon, devis, ph, note, btn, pageHero, ctaBand, breadcrumbLd } from '../layout.mjs';
+import { icon, devis, ph, note, btn, pageHero, ctaBand, breadcrumbLd, clientLogos } from '../layout.mjs';
 
 const caseStudy = (n, image) => `
 <article class="case reveal">
@@ -30,7 +30,14 @@ ${pageHero({
   alt: 'Équipe NCIEC en intervention dans un plateau de bureaux',
 })}
 
-<section class="section" aria-labelledby="cas-t">
+<section class="section section--flush-top" aria-label="Clients">
+  <div class="container">
+    ${clientLogos()}
+    ${note('Logos repris du site actuel nciec.lu. Confirmer l’<strong>accord écrit</strong> de chaque client et demander une version haute définition du logo IL Cosmetics (le fichier actuel fait 171 px de large).')}
+  </div>
+</section>
+
+<section class="section section--tint" aria-labelledby="cas-t">
   <div class="container">
     <h2 id="cas-t">Études de cas</h2>
     ${note('Structure à remplir — 3 cas suffisent. C’est l’élément le plus différenciant du site et le seul entièrement manquant aujourd’hui.', 'info')}
@@ -39,14 +46,6 @@ ${pageHero({
       ${caseStudy(2, 'parking-autolaveuse')}
       ${caseStudy(3, 'facade-cordistes')}
     </div>
-  </div>
-</section>
-
-<section class="section section--tint" aria-labelledby="logos-t">
-  <div class="container">
-    <h2 id="logos-t">Logos clients</h2>
-    ${note('Vérifier l’<strong>accord écrit</strong> de chaque client avant affichage du logo — point à régler avant mise en ligne.')}
-    <ul class="logo-wall" role="list">${Array.from({ length: 12 }, () => `<li>${ph('Logo client')}</li>`).join('')}</ul>
   </div>
 </section>
 
