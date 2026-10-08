@@ -66,8 +66,8 @@ export default {
   </div>
   <div class="container g-vhero__content">
     <p class="g-vhero__eyebrow">Groupe NCIEC · Howald, Luxembourg</p>
-    <h1 id="g-title">Entretenir et équiper<br>vos bâtiments</h1>
-    <p class="g-vhero__lead">Deux métiers, une même adresse. Choisissez votre activité :</p>
+    <h1 id="g-title"><span class="g-hl g-hl--services">Nettoyage</span> et <span class="g-hl g-hl--electro">électroménager</span><br>au Luxembourg</h1>
+    <p class="g-vhero__lead">NCIEC Services nettoie et entretient vos bâtiments. NCIEC Electro vend, livre et installe vos appareils. Choisissez votre activité :</p>
   </div>
   <div class="container g-bars" aria-label="Nos deux sites">
     ${bar({ href: '/services/', name: 'NCIEC Services', what: 'Nettoyage et facility services', domain: 'nciec.lu/services', tone: 'services', external: false })}

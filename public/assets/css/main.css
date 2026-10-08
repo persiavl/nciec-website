@@ -860,3 +860,10 @@ body:has(.g-vhero) .review-toggle { left: auto; right: 16px; bottom: 16px; }
 .certif-lead { max-width: 62ch; margin-bottom: 28px; }
 @media (max-width: 1060px) { .cert-cards { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .cert-cards { grid-template-columns: 1fr; } }
+
+/* landing headline: each trade underlined in the colour of its bar */
+.g-hl { background-repeat: no-repeat; background-size: 100% .14em; background-position: 0 92%; padding-bottom: .04em; }
+.g-hl--services { background-image: linear-gradient(var(--blue), var(--blue)); }
+.g-hl--electro { background-image: linear-gradient(var(--accent), var(--accent)); }
+.g-vhero h1 { max-width: none; font-size: clamp(2.4rem, 5.2vw, 4.6rem); }
+.g-vhero__lead { max-width: 52ch; }
