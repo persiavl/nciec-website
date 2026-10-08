@@ -35,7 +35,7 @@ const LANDING_IMAGE = null;
 
 export default {
   path: '/',
-  variant: 'group',
+  variant: 'portal',
   active: '',
   title: 'NCIEC — Nettoyage, facility services et électroménager à Howald',
   description: 'Le groupe NCIEC réunit NCIEC Services (nettoyage et facility services) et NCIEC Electro (électroménager et équipement) au Luxembourg.',
@@ -64,6 +64,10 @@ export default {
     </video>`}
     <div class="hero__scrim"></div>
   </div>
+  <div class="container g-top">
+    <span class="g-top__logo">${logo('group', 'NCIEC')}</span>
+    <!--LANG-SWITCH-->
+  </div>
   <div class="container g-vhero__content">
     <p class="g-vhero__eyebrow">Groupe NCIEC · Howald, Luxembourg</p>
     <h1 id="g-title"><span class="g-hl g-hl--services">Nettoyage</span> et <span class="g-hl g-hl--electro">électroménager</span><br>au Luxembourg</h1>
@@ -77,6 +81,11 @@ export default {
     <span class="video-toggle__pause">${icon('pause', 'icon icon--sm')}<span class="sr-only">Mettre la vidéo en pause</span></span>
     <span class="video-toggle__play">${icon('play', 'icon icon--sm')}<span class="sr-only">Lire la vidéo</span></span>
   </button>`}
+  <p class="g-legal">
+    <span>© <span data-year>2026</span> N.C.I.E.C. S.àr.l.</span>
+    <a href="/rgpd/">Protection des données</a>
+    <a href="/mentions-legales/">Mentions légales</a>
+  </p>
 </section>
 `,
 };

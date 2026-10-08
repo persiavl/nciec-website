@@ -417,7 +417,8 @@ function groupFooter() {
 }
 
 export function layout({ path, title, description, body, active = '', overlay = false, noindex = false, jsonLd = [], ogImage = '/assets/img/og-image.jpg', variant = 'services' }) {
-  const group = variant === 'group';
+  const portal = variant === 'portal'; // landing page: no header or footer, the page carries its own logo, language switch and legal links
+  const group = variant === 'group' || portal;
   const canonical = SITE.url + path;
   const ld = jsonLd.map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('\n');
   return `<!doctype html>
@@ -446,11 +447,11 @@ ${ld}
 </head>
 <body>
 ${LOGO_SPRITE}
-${group ? groupHeader(active) : header(active, overlay)}
+${portal ? '' : group ? groupHeader(active) : header(active, overlay)}
 <main id="main">
 ${body}
 </main>
-${group ? groupFooter() : footer()}
+${portal ? '' : group ? groupFooter() : footer()}
 <script src="/assets/js/main.js" defer></script>
 </body>
 </html>
