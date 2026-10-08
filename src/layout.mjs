@@ -320,10 +320,8 @@ function footer() {
 // ---------- group (portal) header & footer ----------
 
 const GROUP_NAV = [
-  { key: 'activites', label: 'Nos activités', href: '/#activites' },
   { key: 'a-propos', label: 'À propos', href: '/a-propos/' },
   { key: 'carrieres', label: 'Carrières', href: '/carrieres/' },
-  { key: 'implantation', label: 'Implantation', href: '/#implantation' },
   { key: 'contact', label: 'Contact', href: '/contact/' },
 ];
 

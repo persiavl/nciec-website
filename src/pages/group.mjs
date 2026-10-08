@@ -26,6 +26,13 @@ const door = ({ href, label, domain, tone, external }) => `
 </a>`;
 
 
+/**
+ * Landing visual. The teaser video only shows cleaning; the client will supply a visual that represents
+ * both companies. Put it in public/assets/img/ as a .webp and set its name here, e.g. 'landing-hero'.
+ * While null, the teaser video is used.
+ */
+const LANDING_IMAGE = null;
+
 export default {
   path: '/',
   variant: 'group',
@@ -49,10 +56,12 @@ export default {
   body: () => `
 <section class="hero g-vhero" aria-labelledby="g-title">
   <div class="hero__media">
-    <video class="hero__video" autoplay muted loop playsinline preload="metadata"
+    ${LANDING_IMAGE
+      ? `<img class="hero__video" src="/assets/img/${LANDING_IMAGE}.webp" alt="" fetchpriority="high" decoding="async">`
+      : `<video class="hero__video" autoplay muted loop playsinline preload="metadata"
       poster="/assets/video/teaser-poster.webp"
       data-src-desktop="/assets/video/teaser-720.mp4" data-src-mobile="/assets/video/teaser-480.mp4" aria-hidden="true">
-    </video>
+    </video>`}
     <div class="hero__scrim"></div>
   </div>
   <div class="container g-vhero__content">
@@ -64,130 +73,10 @@ export default {
     ${bar({ href: '/services/', name: 'NCIEC Services', what: 'Nettoyage et facility services', domain: 'nciec.lu/services', tone: 'services', external: false })}
     ${bar({ href: ELECTRO.url, name: 'NCIEC Electro', what: 'Électroménager et équipement', domain: 'nciecsales.lu', tone: 'electro', external: true })}
   </div>
-  <button class="g-vhero__pause video-toggle" type="button" data-video-toggle aria-pressed="false">
+  ${LANDING_IMAGE ? '' : `<button class="g-vhero__pause video-toggle" type="button" data-video-toggle aria-pressed="false">
     <span class="video-toggle__pause">${icon('pause', 'icon icon--sm')}<span class="sr-only">Mettre la vidéo en pause</span></span>
     <span class="video-toggle__play">${icon('play', 'icon icon--sm')}<span class="sr-only">Lire la vidéo</span></span>
-  </button>
-</section>
-
-<section class="clients-band" aria-label="Clients">
-  <div class="container">
-    ${clientLogos({ more: link('Nos références', '/references/') })}
-  </div>
-</section>
-
-<section class="section g-units" id="activites" aria-labelledby="activites-t">
-  <div class="container g-intro">
-    <div>
-      ${eyebrow('Le groupe')}
-      <h2 id="activites-t">Une entreprise luxembourgeoise, deux savoir-faire</h2>
-    </div>
-    <div class="g-intro__side">
-      <p class="lead">Depuis ${ph('année')}, NCIEC entretient et équipe des bâtiments au Luxembourg. NCIEC Services intervient sur site pour le nettoyage et les facility services ; NCIEC Electro conseille, vend, livre et installe l\u2019équipement.</p>
-      <ul class="g-facts" role="list">
-        <li><strong>2</strong><span>activités complémentaires</span></li>
-        <li><strong>${ph('X')}</strong><span>collaborateurs</span></li>
-        <li><strong>1</strong><span>site à Howald</span></li>
-      </ul>
-      ${link('Qui nous sommes', '/a-propos/')}
-    </div>
-  </div>
-  <div class="container g-units__grid">
-
-    <article class="unit unit--services">
-      <div class="unit__media">
-        ${img('facade-cordistes', '', { eager: true })}
-      </div>
-      <div class="unit__body">
-        ${logo('services', 'NCIEC Services', 'unit__logo')}
-        <h3 class="unit__title">Nettoyage et facility services</h3>
-        <p class="unit__lead">Bureaux, vitres, façades, extérieurs et interventions spécialisées pour les entreprises, les institutions, les copropriétés et les particuliers.</p>
-        ${checklist(['Entretien de bureaux et de bâtiments', 'Vitres, façades et toitures', 'Extérieurs, espaces verts et service hiver', 'Fin de chantier et facility services'])}
-        <p class="unit__extra">${link('Demander un devis', devis(''))}</p>
-      </div>
-      ${door({ href: '/services/', label: 'Entrer sur NCIEC Services', domain: 'nciec.lu/services', tone: 'services', external: false })}
-    </article>
-
-    <article class="unit unit--electro">
-      <div class="unit__media unit__media--art">
-        ${appliances}
-        <span class="unit__brands">${ELECTRO.brands.slice(0, 6).join(' · ')}</span>
-      </div>
-      <div class="unit__body">
-        ${logo('electro', 'NCIEC Electro', 'unit__logo')}
-        <h3 class="unit__title">Électroménager et équipement</h3>
-        <p class="unit__lead">Des milliers de références des grandes marques, pour la maison comme pour les professionnels, avec les services d\u2019installation.</p>
-        ${checklist(['Gros électroménager et appareils encastrables', 'Cuisine et ménage, TV et audio, traitement de l\u2019air', 'Gamme professionnelle et outillage', 'Livraison et installation'])}
-        <p class="unit__extra"><a class="text-link" href="${ELECTRO.phoneHref}">${icon('phone', 'icon icon--sm')}${ELECTRO.phone}</a></p>
-      </div>
-      ${door({ href: ELECTRO.url, label: 'Entrer dans la boutique NCIEC Electro', domain: 'nciecsales.lu', tone: 'electro', external: true })}
-    </article>
-
-  </div>
-  </section>
-
-<section class="section section--navy g-careers" aria-labelledby="carrieres-t">
-  <div class="container g-careers__inner">
-    <div>
-      ${eyebrow('Carrières')}
-      <h2 id="carrieres-t">Nous recrutons pour nos deux activités</h2>
-      <p>Contrats déclarés, horaires annoncés à l’avance, formation à la prise de poste. Postulez à une offre ou envoyez une candidature spontanée.</p>
-    </div>
-    <div class="btn-row">
-      ${btn('Voir les offres d’emploi', '/carrieres/', 'accent')}
-      ${btn('Candidature spontanée', '/carrieres/#candidature', 'ghost-light')}
-    </div>
-  </div>
-</section>
-
-<section class="section section--tint" id="implantation" aria-labelledby="implantation-t">
-  <div class="container g-location">
-    <div class="g-location__text">
-      ${eyebrow('Implantation')}
-      <h2 id="implantation-t">Une adresse pour les deux activités</h2>
-      <address class="g-address">${icon('pin')}<span><strong>${SITE.legal}</strong><br>${SITE.street}<br>${SITE.zip} ${SITE.city}, ${SITE.country}</span></address>
-      <p class="small">${ph('Parking visiteurs, arrêt de bus le plus proche, accès au showroom')}</p>
-      <p><a class="text-link" href="https://www.openstreetmap.org/search?query=15%20rue%20des%20Joncs%20Howald" target="_blank" rel="noopener">Ouvrir l’itinéraire${icon('external')}<span class="sr-only"> (nouvel onglet)</span></a></p>
-    </div>
-    <div class="map map--large" role="img" aria-label="Plan stylisé : NCIEC, 15 rue des Joncs à Howald">
-      <svg viewBox="0 0 480 260" aria-hidden="true"><rect width="480" height="260" fill="currentColor" opacity=".06"/><path d="M0 170 C120 140 220 200 480 130" stroke="currentColor" stroke-width="14" fill="none" opacity=".18"/><path d="M160 0 L220 260" stroke="currentColor" stroke-width="9" fill="none" opacity=".14"/><path d="M0 60 L480 88" stroke="currentColor" stroke-width="6" fill="none" opacity=".12"/><path d="M340 0 L300 260" stroke="currentColor" stroke-width="5" fill="none" opacity=".1"/></svg>
-      <span class="map__pin">${icon('pin')}</span>
-    </div>
-  </div>
-</section>
-
-<section class="section" aria-labelledby="contact-t">
-  <div class="container">
-    <div class="section-head section-head--split">
-      <div>
-        ${eyebrow('Contact')}
-        <h2 id="contact-t">À qui s’adresser ?</h2>
-      </div>
-      <p class="lead">Chaque activité a sa propre ligne. Pour tout le reste, le formulaire de contact oriente votre demande vers la bonne équipe.</p>
-    </div>
-    <div class="g-contacts">
-      <article class="g-contact">
-        ${logo('services', 'NCIEC Services', 'g-contact__logo')}
-        <p>Devis de nettoyage, facility services, intervention urgente</p>
-        <ul class="info-list" role="list">
-          <li>${icon('phone')}<a href="${SITE.phoneHref}">${SITE.phone}</a></li>
-          <li>${icon('mail')}<a href="mailto:${SITE.email}">${SITE.email}</a></li>
-          <li>${icon('clock')}<span>${ph('lundi–vendredi, XX h–XX h')}</span></li>
-        </ul>
-        ${btn('Demander un devis gratuit', devis(''), 'primary')}
-      </article>
-      <article class="g-contact">
-        ${logo('electro', 'NCIEC Electro', 'g-contact__logo')}
-        <p>Conseil produit, commande, livraison, installation, service après-vente</p>
-        <ul class="info-list" role="list">
-          <li>${icon('phone')}<a href="${ELECTRO.phoneHref}">${ELECTRO.phone}</a></li>
-          <li>${icon('mail')}<span>${ph('e-mail NCIEC Electro')}</span></li>
-          <li>${icon('clock')}<span>${ELECTRO.hours}</span></li>
-        </ul>
-        ${btn('Contacter NCIEC Electro', '/contact/?prestation=electro-conseil#devis', 'outline')}
-      </article>
-    </div>
-  </div>
+  </button>`}
 </section>
 `,
 };
