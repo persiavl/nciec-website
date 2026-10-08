@@ -20,3 +20,12 @@ npm run build      # → dist/  (deploy this folder)
 Every CTA links to `/contact/?prestation=<key>&objet=<topic>#devis`, which prefills the quote form.
 
 Palette with contrast ratios: `/charte/` (noindex).
+
+## Languages (FR · DE · EN)
+
+French is the source and lives at the root (`/`, `/services/`, …). German is built to `/de/…` and English to `/en/…`.
+
+- Texts are written in French in `src/pages/*.mjs`. At build time, every text node and translatable attribute of the rendered French page is swapped using `src/i18n/de.json` and `src/i18n/en.json`, which are keyed by the exact French text.
+- **When you change or add a French text, add the same key to both JSON files.** The build prints `[i18n] … untranslated segment(s)` with the missing keys, and the page falls back to French for those.
+- If a translation must start with a space because it follows a highlighted placeholder (e.g. German verb order "Seit [Jahr] pflegt …"), start the value with a space.
+- UI strings used by JavaScript (form errors, step label, redirect screen, message prefills) are in `NCIEC_I18N` at the top of `public/assets/js/main.js`.

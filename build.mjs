@@ -52,14 +52,80 @@ const REDIRECTS = [
   ['/jobs/', '/carrieres/'],
 ];
 
+// ---------- languages ----------
+// French is written in the page modules and served at the root. German (/de/) and English (/en/) are produced
+// from the rendered French HTML: every text node and translatable attribute is swapped using src/i18n/<lang>.json,
+// keyed by the exact French text. Missing keys are reported at the end of the build.
+const LANGS = [
+  { code: 'fr', prefix: '', locale: 'fr_LU', label: 'Langue' },
+  { code: 'de', prefix: '/de', locale: 'de_LU', label: 'Sprache' },
+  { code: 'en', prefix: '/en', locale: 'en_GB', label: 'Language' },
+];
+const DICTS = {
+  en: JSON.parse(await readFile(join(root, 'src/i18n/en.json'), 'utf8')),
+  de: JSON.parse(await readFile(join(root, 'src/i18n/de.json'), 'utf8')),
+};
+const missing = { en: new Set(), de: new Set() };
+const norm = (s) => s.replace(/\s+/g, ' ').trim();
+const hasWords = (s) => /[A-Za-zÀ-ÿ]{2,}/.test(s);
+
+function translate(html, code) {
+  const dict = DICTS[code];
+  const swap = (raw) => {
+    const key = norm(raw);
+    if (!hasWords(key)) return raw;
+    const value = dict[key];
+    if (value === undefined) { missing[code].add(key); return raw; }
+    const lead = raw.match(/^\s*/)[0];
+    const trail = raw.match(/\s*$/)[0];
+    // a translation may start with a space when it continues after an inline element (e.g. "Seit [Jahr] pflegt…")
+    return (lead || (value.startsWith(' ') ? ' ' : '')) + value.trim() + trail;
+  };
+  // split out <script>/<style> so their contents are never touched
+  return html.split(/(<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>)/).map((part, i) => {
+    if (i % 2) return part;
+    return part
+      .replace(/>([^<]+)</g, (m, txt) => `>${swap(txt)}<`)
+      .replace(/(\s(?:alt|aria-label|title|placeholder|data-title)=")([^"]+)(")/g, (m, a, v, b) => a + swap(v) + b)
+      .replace(/(<meta (?:name="description"|property="og:(?:title|description)") content=")([^"]+)(")/g, (m, a, v, b) => a + swap(v) + b);
+  }).join('');
+}
+
+const langSwitch = (path, current) => `<span class="lang" role="group" aria-label="${current.label}">${LANGS.map((l) =>
+  `<a href="${l.prefix}${path}" hreflang="${l.code}" lang="${l.code}"${l.code === current.code ? ' aria-current="true"' : ''}>${l.code.toUpperCase()}</a>`).join('')}</span>`;
+
+const hreflangLinks = (path) => [
+  ...LANGS.map((l) => `<link rel="alternate" hreflang="${l.code}" href="${SITE.url}${l.prefix}${path}">`),
+  `<link rel="alternate" hreflang="x-default" href="${SITE.url}${path}">`,
+].join('\n');
+
+function localize(html, path, lang) {
+  if (lang.code !== 'fr') {
+    html = translate(html, lang.code)
+      .replace('<html lang="fr">', `<html lang="${lang.code}">`)
+      .replace('content="fr_LU"', `content="${lang.locale}"`)
+      .replace(`<link rel="canonical" href="${SITE.url}${path}">`, `<link rel="canonical" href="${SITE.url}${lang.prefix}${path}">`)
+      .replace(`<meta property="og:url" content="${SITE.url}${path}">`, `<meta property="og:url" content="${SITE.url}${lang.prefix}${path}">`)
+      // internal links stay inside the language (assets are shared)
+      .replace(/\bhref="\/(?!assets\/)/g, `href="${lang.prefix}/`);
+  }
+  return html
+    .split('<!--LANG-SWITCH-->').join(langSwitch(path, lang))
+    .replace('</head>', `${hreflangLinks(path)}\n</head>`);
+}
+
 await rm(out, { recursive: true, force: true });
 await cp(join(root, 'public'), out, { recursive: true });
 
 for (const p of pages) {
-  const html = withBase(versionAssets(layout({ ...p, noindex: p.noindex || DEMO, body: p.body() })));
-  const file = p.file ? join(out, p.file) : join(out, p.path, 'index.html');
-  await mkdir(dirname(file), { recursive: true });
-  await writeFile(file, html);
+  const fr = versionAssets(layout({ ...p, noindex: p.noindex || DEMO, body: p.body() }));
+  const path = p.file ? `/${p.file}` : p.path;
+  for (const lang of LANGS) {
+    const html = withBase(localize(fr, path, lang));
+    const file = join(out, lang.prefix, p.file ? p.file : join(p.path, 'index.html'));
+    await mkdir(dirname(file), { recursive: true });
+    await writeFile(file, html);
+  }
 }
 
 // Favicon = the logo mark (first six paths of the logo SVG).
@@ -69,7 +135,7 @@ await writeFile(join(out, 'assets/img/favicon.svg'), `<svg xmlns="http://www.w3.
 
 const indexable = pages.filter((p) => !p.noindex);
 await writeFile(join(out, 'sitemap.xml'),
-  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${indexable.map((p) => `  <url><loc>${SITE.url}${p.path}</loc></url>`).join('\n')}\n</urlset>\n`);
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${indexable.flatMap((p) => LANGS.map((l) => `  <url><loc>${SITE.url}${l.prefix}${p.path}</loc></url>`)).join('\n')}\n</urlset>\n`);
 await writeFile(join(out, 'robots.txt'), DEMO
   ? 'User-agent: *\nDisallow: /\n'
   : `User-agent: *\nAllow: /\nDisallow: /charte/\nSitemap: ${SITE.url}/sitemap.xml\n`);
@@ -83,4 +149,7 @@ await writeFile(join(out, '.htaccess'), [
   '',
 ].join('\n'));
 
-console.log(`Built ${pages.length} pages → ${out}${BASE ? ` (base ${BASE})` : ''}${DEMO ? ' [demo, noindex]' : ''}`);
+for (const [code, set] of Object.entries(missing)) {
+  if (set.size) console.warn(`[i18n] ${set.size} untranslated segment(s) in ${code}:\n  ` + [...set].slice(0, 20).join('\n  '));
+}
+console.log(`Built ${pages.length} pages × ${LANGS.length} languages`);

@@ -1,3 +1,42 @@
+/* NCIEC — UI strings used by scripts, per page language (<html lang>) */
+const NCIEC_LANG = (document.documentElement.lang || 'fr').slice(0, 2);
+const NCIEC_I18N = {
+  fr: {
+    radio: 'Merci de choisir une option.', checkbox: 'Merci de cocher cette case pour continuer.', file: 'Merci de joindre un fichier.',
+    required: 'Ce champ est obligatoire.', email: 'Adresse e-mail invalide.', invalid: 'Valeur invalide.',
+    step: (n, total, title, left) => `Étape ${n} sur ${total} · ${title}${left ? ` — encore ${left} étape${left > 1 ? 's' : ''}` : ''}`,
+    redirect: 'Redirection vers',
+    objets: {
+      'visite-sur-site': 'Je souhaite planifier une visite sur site.', 'diagnostic-sol': 'Je souhaite un diagnostic de sol.',
+      robots: 'Je souhaite savoir si notre site se prête aux robots de nettoyage.', 'travaux-en-hauteur': 'Je souhaite planifier une intervention en hauteur.',
+      'service-hiver': 'Je souhaite réserver un contrat service hiver.', 'diagnostic-facade': 'Je souhaite un diagnostic de façade.',
+    },
+  },
+  en: {
+    radio: 'Please choose an option.', checkbox: 'Please tick this box to continue.', file: 'Please attach a file.',
+    required: 'This field is required.', email: 'Invalid email address.', invalid: 'Invalid value.',
+    step: (n, total, title, left) => `Step ${n} of ${total} · ${title}${left ? ` — ${left} more step${left > 1 ? 's' : ''}` : ''}`,
+    redirect: 'Redirecting to',
+    objets: {
+      'visite-sur-site': 'I would like to schedule a site visit.', 'diagnostic-sol': 'I would like a floor assessment.',
+      robots: 'I would like to know whether our site is suitable for cleaning robots.', 'travaux-en-hauteur': 'I would like to schedule work at height.',
+      'service-hiver': 'I would like to book a winter service contract.', 'diagnostic-facade': 'I would like a façade assessment.',
+    },
+  },
+  de: {
+    radio: 'Bitte wählen Sie eine Option.', checkbox: 'Bitte setzen Sie dieses Häkchen, um fortzufahren.', file: 'Bitte fügen Sie eine Datei bei.',
+    required: 'Dieses Feld ist erforderlich.', email: 'Ungültige E-Mail-Adresse.', invalid: 'Ungültiger Wert.',
+    step: (n, total, title, left) => `Schritt ${n} von ${total} · ${title}${left ? ` – noch ${left} Schritt${left > 1 ? 'e' : ''}` : ''}`,
+    redirect: 'Weiterleitung zu',
+    objets: {
+      'visite-sur-site': 'Ich möchte eine Besichtigung vor Ort vereinbaren.', 'diagnostic-sol': 'Ich möchte eine Bodenanalyse.',
+      robots: 'Ich möchte wissen, ob sich unser Standort für Reinigungsroboter eignet.', 'travaux-en-hauteur': 'Ich möchte Arbeiten in der Höhe planen.',
+      'service-hiver': 'Ich möchte einen Winterdienstvertrag reservieren.', 'diagnostic-facade': 'Ich möchte eine Fassadenanalyse.',
+    },
+  },
+};
+const T = NCIEC_I18N[NCIEC_LANG] || NCIEC_I18N.fr;
+
 /* NCIEC Services — front-end behaviour (no dependencies) */
 (() => {
   const $ = (s, r = document) => r.querySelector(s);
@@ -124,13 +163,13 @@
   };
   const message = (el) => {
     if (el.validity.valueMissing) {
-      if (el.type === 'radio') return 'Merci de choisir une option.';
-      if (el.type === 'checkbox') return 'Merci de cocher cette case pour continuer.';
-      if (el.type === 'file') return 'Merci de joindre un fichier.';
-      return 'Ce champ est obligatoire.';
+      if (el.type === 'radio') return T.radio;
+      if (el.type === 'checkbox') return T.checkbox;
+      if (el.type === 'file') return T.file;
+      return T.required;
     }
-    if (el.validity.typeMismatch && el.type === 'email') return 'Adresse e-mail invalide.';
-    return 'Valeur invalide.';
+    if (el.validity.typeMismatch && el.type === 'email') return T.email;
+    return T.invalid;
   };
   function validate(scope) {
     let firstBad = null;
@@ -189,14 +228,7 @@
       $('[data-prefill-hint]', quote).hidden = false;
       if (p === 'particuliers') { const r = $('input[name="profil"][value="particulier"]', quote); if (r) r.checked = true; }
     }
-    const OBJETS = {
-      'visite-sur-site': 'Je souhaite planifier une visite sur site.',
-      'diagnostic-sol': 'Je souhaite un diagnostic de sol.',
-      'robots': 'Je souhaite savoir si notre site se prête aux robots de nettoyage.',
-      'travaux-en-hauteur': 'Je souhaite planifier une intervention en hauteur.',
-      'service-hiver': 'Je souhaite réserver un contrat service hiver.',
-      'diagnostic-facade': 'Je souhaite un diagnostic de façade.',
-    };
+    const OBJETS = T.objets;
     const o = params.get('objet');
     const msg = $('textarea[name="message"]', quote);
     if (o && OBJETS[o] && !msg.value) msg.value = OBJETS[o] + '\n\n';
@@ -239,7 +271,7 @@
       submit.hidden = i !== steps.length - 1;
       bar.style.width = `${((i + 1) / steps.length) * 100}%`;
       const left = steps.length - 1 - i;
-      label.textContent = `Étape ${i + 1} sur ${steps.length} · ${steps[i].dataset.title}${left ? ` — encore ${left} étape${left > 1 ? 's' : ''}` : ''}`;
+      label.textContent = T.step(i + 1, steps.length, steps[i].dataset.title, left);
       if (focus) steps[i].querySelector('input, select, textarea')?.focus();
     };
     next.addEventListener('click', () => { if (validate(steps[i])) show(i + 1); });
@@ -286,7 +318,7 @@
     portal.style.setProperty('--y', `${y}px`);
     portal.innerHTML = `<div class="door-portal__inner">
       <svg viewBox="0 0 391 139" aria-hidden="true"><use href="#logo-${tone}"/></svg>
-      <p>Redirection vers<strong>${door.dataset.doorDomain}</strong></p>
+      <p>${T.redirect}<strong>${door.dataset.doorDomain}</strong></p>
       <span class="door-portal__bar"></span>
     </div>`;
     document.body.appendChild(portal);

@@ -232,11 +232,7 @@ function header(active, overlay) {
       <p class="topbar__links">
         ${ext('Espace client', SITE.portal)}
         ${ext('NCIEC Electro', ELECTRO.url)}
-        <span class="lang" role="group" aria-label="Langue">
-          <a href="/" aria-current="true" lang="fr">FR</a>
-          <span aria-disabled="true" title="Traduction anglaise à venir" lang="en">EN</span>
-          <span aria-disabled="true" title="Version allemande à l'étude" lang="de">DE</span>
-        </span>
+        <!--LANG-SWITCH-->
       </p>
     </div>
   </div>
@@ -344,11 +340,7 @@ function groupHeader(active) {
       </p>
       <p class="topbar__links">
         ${ext('Espace client', SITE.portal)}
-        <span class="lang" role="group" aria-label="Langue">
-          <a href="/" aria-current="true" lang="fr">FR</a>
-          <span aria-disabled="true" title="Traduction anglaise à venir" lang="en">EN</span>
-          <span aria-disabled="true" title="Version allemande à l'étude" lang="de">DE</span>
-        </span>
+        <!--LANG-SWITCH-->
       </p>
     </div>
   </div>
