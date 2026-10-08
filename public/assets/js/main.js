@@ -297,3 +297,13 @@
   // Coming back with the browser's Back button restores the page from cache: remove the overlay.
   addEventListener('pageshow', () => document.querySelectorAll('.door-portal').forEach((p) => p.remove()));
 })();
+
+/* ---------- client logo carousel: pause / play ---------- */
+document.querySelectorAll('[data-clients]').forEach((box) => {
+  const btn = box.querySelector('[data-clients-toggle]');
+  btn?.addEventListener('click', () => {
+    const paused = !box.hasAttribute('data-paused');
+    box.toggleAttribute('data-paused', paused);
+    btn.setAttribute('aria-pressed', String(paused));
+  });
+});

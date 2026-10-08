@@ -58,18 +58,27 @@ const pngSize = (file) => {
   return [b.readUInt32BE(16), b.readUInt32BE(20)];
 };
 export function clientLogos({ heading = 'Ils nous font confiance', more = '' } = {}) {
-  const items = CLIENTS.map((c) => {
+  // copy 0 is the real list; copy 1 only exists to make the loop seamless, so it is hidden from assistive tech
+  const items = (copy) => CLIENTS.map((c) => {
     const [w, h] = pngSize(`${c.key}-mono.png`);
     const height = Math.round(Math.min(54, Math.max(28, Math.sqrt(4800 / (w / h)))));
-    return `<li class="client" style="--h:${height}px">
-      <img class="client__mono" src="/assets/img/clients/${c.key}-mono.png" alt="${c.name}" width="${w}" height="${h}" loading="lazy" decoding="async">
-      <img class="client__color" src="/assets/img/clients/${c.key}-color.png" alt="" width="${w}" height="${h}" loading="lazy" decoding="async" aria-hidden="true">
+    return `<li class="client" style="--h:${height}px"${copy ? ' aria-hidden="true"' : ''}>
+      <img class="client__mono" src="/assets/img/clients/${c.key}-mono.png" alt="${copy ? '' : c.name}" width="${w}" height="${h}" decoding="async">
+      <img class="client__color" src="/assets/img/clients/${c.key}-color.png" alt="" width="${w}" height="${h}" decoding="async" aria-hidden="true">
     </li>`;
   }).join('');
   return `
-<div class="clients">
-  ${heading ? `<p class="clients__heading">${heading}</p>` : ''}
-  <ul class="clients__list" role="list">${items}</ul>
+<div class="clients" data-clients>
+  <div class="clients__top">
+    ${heading ? `<p class="clients__heading">${heading}</p>` : ''}
+    <button class="clients__toggle" type="button" aria-pressed="false" data-clients-toggle>
+      <span class="clients__pause">${icon('pause', 'icon icon--xs')}<span class="sr-only">Mettre le défilement des logos en pause</span></span>
+      <span class="clients__play">${icon('play', 'icon icon--xs')}<span class="sr-only">Reprendre le défilement des logos</span></span>
+    </button>
+  </div>
+  <div class="clients__viewport">
+    <ul class="clients__track" role="list" aria-label="Logos de nos clients">${items(0)}${items(1)}</ul>
+  </div>
   ${more}
 </div>`;
 }
