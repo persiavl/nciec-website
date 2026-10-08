@@ -314,8 +314,7 @@ function footer() {
     <p>© <span data-year>2026</span> N.C.I.E.C. S.àr.l.</p>
     <p><a href="/rgpd/">Protection des données</a><a href="/mentions-legales/">Mentions légales</a></p>
   </div>
-</footer>
-<button class="review-toggle" type="button" aria-pressed="false" data-review-toggle title="Affiche les notes de rédaction et les points à valider">${icon('eye', 'icon icon--xs')}<span>Mode relecture</span></button>`;
+</footer>`;
 }
 
 // ---------- group (portal) header & footer ----------
@@ -416,8 +415,7 @@ function groupFooter() {
     <p>© <span data-year>2026</span> N.C.I.E.C. S.àr.l.</p>
     <p><a href="/rgpd/">Protection des données</a><a href="/mentions-legales/">Mentions légales</a></p>
   </div>
-</footer>
-<button class="review-toggle" type="button" aria-pressed="false" data-review-toggle title="Affiche les notes de rédaction et les points à valider">${icon('eye', 'icon icon--xs')}<span>Mode relecture</span></button>`;
+</footer>`;
 }
 
 export function layout({ path, title, description, body, active = '', overlay = false, noindex = false, jsonLd = [], ogImage = '/assets/img/og-image.jpg', variant = 'services' }) {
@@ -445,7 +443,7 @@ ${noindex ? '<meta name="robots" content="noindex">' : ''}
 <link rel="preload" href="/assets/fonts/plus-jakarta-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/main.css">
-<script>document.documentElement.classList.add('js');try{if(localStorage.getItem('nciec-review')==='1')document.documentElement.classList.add('review')}catch(e){}</script>
+<script>document.documentElement.classList.add('js')</script>
 ${ld}
 </head>
 <body>

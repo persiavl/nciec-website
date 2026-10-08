@@ -55,7 +55,6 @@ ${pageHero({
     <h2 id="certif-t">Certifications</h2>
     <p class="lead certif-lead">Nos certifications imposent des procédures écrites, des audits réguliers et un suivi des incidents. Les numéros et organismes sont indiqués pour vos appels d’offres.</p>
     ${certCards()}
-    ${note('Numéros et organismes fournis par le client (10/2026). Encore à préciser : dates de validité, et l’entité couverte (NCIEC Services, NCIEC Electro ou les deux). Option : proposer les certificats en PDF à télécharger.', 'info')}
   </div>
 </section>
 

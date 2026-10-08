@@ -48,7 +48,6 @@ const legal = (path, title, h1) => ({
   body: () => `
 ${pageHero({ root: GROUP_ROOT, crumbs: [{ label: h1 }], title: h1 })}
 <section class="section section--flush-top"><div class="container narrow prose">
-  ${note('Contenu juridique à fournir par le client (texte actuel de nciec.lu à reprendre et à relire).', 'info')}
   <p>${ph('Texte juridique')}</p>
 </div></section>`,
 });

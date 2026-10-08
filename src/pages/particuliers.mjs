@@ -60,7 +60,6 @@ ${block({
       <span class="fiscal__big">450 €</span>
       <span class="fiscal__small">par mois, au maximum</span>
     </div>
-    ${note('<strong>À vérifier avant publication :</strong> montant repris de l’ancien site. Confirmer la valeur en vigueur pour l’année fiscale 2026 et citer la source officielle. Un chiffre fiscal périmé sur une page commerciale est un risque inutile.')}
   </div>
 </section>
 

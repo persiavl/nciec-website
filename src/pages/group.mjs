@@ -124,8 +124,7 @@ export default {
     </article>
 
   </div>
-  <div class="container">${note('Pas encore de photo pour NCIEC Electro : la carte utilise une illustration. À remplacer par une photo réelle du showroom ou de l\u2019équipe (pas de banque d\u2019images).', 'info')}</div>
-</section>
+  </section>
 
 <section class="section section--navy g-careers" aria-labelledby="carrieres-t">
   <div class="container g-careers__inner">

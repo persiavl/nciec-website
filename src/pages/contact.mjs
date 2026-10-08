@@ -89,7 +89,6 @@ ${pageHero({
       </div>
     </aside>
   </div>
-  <div class="container">${note('Maquette front-end : le formulaire valide les champs et affiche la confirmation, mais n’envoie encore rien. Le champ « Prestation souhaitée » se préremplit via <code>?prestation=</code> depuis chaque CTA.', 'info')}</div>
-</section>
+  </section>
 `,
 };

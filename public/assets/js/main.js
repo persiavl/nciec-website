@@ -141,17 +141,6 @@ const T = NCIEC_I18N[NCIEC_LANG] || NCIEC_I18N.fr;
     map.forEach((_, id) => { const s = document.getElementById(id); s && io.observe(s); });
   }
 
-  /* ---------- review mode (shows editorial notes) ---------- */
-  const rToggle = $('[data-review-toggle]');
-  const root = document.documentElement;
-  rToggle?.setAttribute('aria-pressed', String(root.classList.contains('review')));
-  rToggle?.addEventListener('click', () => {
-    const on = !root.classList.contains('review');
-    root.classList.toggle('review', on);
-    rToggle.setAttribute('aria-pressed', String(on));
-    try { localStorage.setItem('nciec-review', on ? '1' : '0'); } catch (e) {}
-  });
-
   /* ---------- form validation ---------- */
   const clearError = (el) => {
     // Errors are always inserted right after the consent label, the choice row, or the control itself.

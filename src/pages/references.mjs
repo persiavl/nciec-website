@@ -33,14 +33,12 @@ ${pageHero({
 <section class="section section--flush-top" aria-label="Clients">
   <div class="container">
     ${clientLogos()}
-    ${note('Logos repris du site actuel nciec.lu. Confirmer l’<strong>accord écrit</strong> de chaque client et demander une version haute définition du logo IL Cosmetics (le fichier actuel fait 171 px de large).')}
   </div>
 </section>
 
 <section class="section section--tint" aria-labelledby="cas-t">
   <div class="container">
     <h2 id="cas-t">Études de cas</h2>
-    ${note('Structure à remplir — 3 cas suffisent. C’est l’élément le plus différenciant du site et le seul entièrement manquant aujourd’hui.', 'info')}
     <div class="case-list">
       ${caseStudy(1, 'robot-nettoyage')}
       ${caseStudy(2, 'parking-autolaveuse')}

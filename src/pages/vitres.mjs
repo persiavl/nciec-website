@@ -46,7 +46,6 @@ ${block({
     <div>
       <h2 id="frequence-t">À quelle fréquence faire laver ses vitres ?</h2>
       <p class="lead">En zone urbaine et le long des axes routiers, quatre passages par an suffisent rarement à maintenir un rendu correct ; en zone protégée, deux peuvent suffire. Nous recommandons une fréquence après visite, en fonction de l’exposition réelle du bâtiment.</p>
-      ${note('Sur l’ancien site, le bloc « Nettoyage de vitres avec nacelle » reprenait mot pour mot les textes « stores » et « accès difficiles ». Les trois blocs sont ici fusionnés en deux sujets distincts.', 'info')}
     </div>
   </div>
 </section>

@@ -44,7 +44,6 @@ ${toc([['sinistre', 'Après sinistre'], ['desinfection', 'Désinfection'], ['per
       <div><strong>Intervention urgente</strong><span>${ph('numéro dédié')} — à défaut ${SITE.phone}</span></div>
       <a class="btn btn--alert" href="${SITE.phoneHref}">${icon('phone')}Appeler maintenant</a>
     </div>
-    ${note('Sans ligne d’urgence dédiée, la promesse d’intervention en urgence n’est pas tenable (point 7 de la liste de décisions).')}
   </div>
 </section>
 

@@ -44,7 +44,6 @@ ${pageHero({
         <a class="btn btn--outline btn--sm" href="#candidature" data-job="laveur-vitres">Postuler${icon('arrow')}</a>
       </article>
     </div>
-    ${note('Aucune offre NCIEC Electro n’est publiée pour l’instant (vente, livraison, installation ?) — à compléter avec le client. Indiquer une fourchette salariale augmente nettement le volume de candidatures qualifiées dans ce secteur. À arbitrer avec le client.', 'info')}
   </div>
 </section>
 
@@ -140,7 +139,6 @@ ${pageHero({
         <div class="form__success" data-success hidden tabindex="-1">${icon('check')}<div><strong>CV reçu, merci.</strong><p>Nous vous rappelons pour compléter votre profil par téléphone.</p></div></div>
       </form>
     </div>
-    ${note('Maquette front-end : les formulaires ne sont pas encore reliés à un back-end. La question sur le genre a été supprimée (aucune obligation légale identifiée).', 'info')}
   </div>
 </section>
 `,

@@ -26,7 +26,6 @@ ${pageHero({
   image: 'haute-pression',
   alt: 'Agent NCIEC nettoyant un mur et une barrière au nettoyeur haute pression',
 })}
-<div class="container">${note('<strong>À valider avant publication :</strong> la revendication « 70 % moins cher qu’une nouvelle peinture » figurait sur l’ancien site sans aucune base. Elle est remplacée ici par la formulation de repli. Si le client fournit un comparatif chiffré sur un chantier réel, on peut l’afficher avec sa source.')}</div>
 ${toc([['diagnostic', 'Diagnostic'], ['techniques', 'Techniques'], ['toitures', 'Toitures'], ['protection', 'Hydrofuge et anti-graffitis']])}
 
 ${block({

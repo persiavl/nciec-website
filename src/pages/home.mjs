@@ -129,8 +129,7 @@ export default {
       <h2 id="confiance">Ils nous font confiance</h2>
     </div>
     ${clientLogos({ heading: '' })}
-    ${note('Logos repris du site actuel nciec.lu. Confirmer l’<strong>accord écrit</strong> de chaque client et demander une version haute définition du logo IL Cosmetics (le fichier actuel fait 171 px de large).')}
-    ${note('Témoignages à collecter auprès de 2 ou 3 de ces clients.', 'info')}
+    
     <div class="testimonials">
       ${[1, 2, 3].map(() => `
       <figure class="testimonial">
