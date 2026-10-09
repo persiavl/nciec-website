@@ -66,8 +66,6 @@ ${pageHero({
           <p class="field__hint" data-prefill-hint hidden>${icon('check', 'icon icon--xs')}Prérempli depuis la page que vous consultiez — modifiable.</p>
         </fieldset>
         <div class="field-grid">
-          <div class="field"><label for="q-surface">Surface approximative <span class="opt">(facultatif)</span></label><input id="q-surface" name="surface" placeholder="ex. 800 m², 3 étages"></div>
-          <div class="field"><label for="q-loc">Localité</label><input id="q-loc" name="localite" autocomplete="address-level2" required></div>
           <div class="field"><label for="q-nom">Nom et prénom</label><input id="q-nom" name="nom" autocomplete="name" required></div>
           <div class="field"><label for="q-mail">E-mail</label><input id="q-mail" name="email" type="email" autocomplete="email" required></div>
           <div class="field"><label for="q-tel">Téléphone</label><input id="q-tel" name="tel" type="tel" autocomplete="tel" required></div>
