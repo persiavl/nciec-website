@@ -210,10 +210,11 @@ const T = NCIEC_I18N[NCIEC_LANG] || NCIEC_I18N.fr;
   const quote = $('[data-quote-form]');
   if (quote) {
     const params = new URLSearchParams(location.search);
-    const sel = $('select[name="prestation"]', quote);
+    // Service picker = icon tiles (radio buttons named "prestation")
     const p = params.get('prestation');
-    if (p && [...sel.options].some((o) => o.value === p)) {
-      sel.value = p;
+    const tile = p && [...quote.querySelectorAll('input[name="prestation"]')].find((r) => r.value === p);
+    if (tile) {
+      tile.checked = true;
       $('[data-prefill-hint]', quote).hidden = false;
       if (p === 'particuliers') { const r = $('input[name="profil"][value="particulier"]', quote); if (r) r.checked = true; }
     }

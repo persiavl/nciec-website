@@ -894,3 +894,32 @@ body:has(.g-vhero) .review-toggle { left: auto; right: 16px; bottom: 16px; }
 .fiscal .todo-note { grid-column: 1 / -1; margin: 0; }
 .contact-aside .todo-note, .form-card > .todo-note { margin: 0 0 4px; }
 .g-vhero .todo-note { max-width: 62ch; margin: 18px 0 0; }
+
+/* ---------- contact: service picker with icon tiles (radio buttons) ---------- */
+.picker-field { border: 0; padding: 0; margin: 0; min-width: 0; }
+.picker-field > legend { padding: 0; margin-bottom: 8px; }
+.picker { display: grid; gap: 18px; }
+.picker.choice-row { display: grid; }
+.picker__title { margin: 0 0 8px; font: 700 .72rem/1 var(--font-body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.picker__tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 10px; }
+.tile-choice { position: relative; cursor: pointer; display: block; }
+.tile-choice input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.tile-choice__box { position: relative; height: 100%; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 16px 10px 14px; border-radius: 14px; border: 1.5px solid var(--line); background: #fff; text-align: center; transition: border-color .15s, background-color .15s, transform .15s var(--ease), box-shadow .15s; }
+.tile-choice__icon { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 13px; background: var(--ice); color: var(--blue-700); transition: background-color .15s, color .15s; }
+.tile-choice__icon .icon { width: 24px; height: 24px; }
+.tile-choice__label { font-size: .85rem; font-weight: 600; line-height: 1.25; color: var(--navy); }
+.tile-choice__check { position: absolute; top: 8px; right: 8px; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--blue-600); color: #fff; opacity: 0; transform: scale(.6); transition: opacity .15s, transform .15s var(--ease); }
+.tile-choice__check .icon { width: 12px; height: 12px; stroke-width: 3; }
+.tile-choice:hover .tile-choice__box { border-color: var(--blue); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.tile-choice input:focus-visible + .tile-choice__box { outline: 3px solid var(--blue); outline-offset: 2px; }
+.tile-choice input:checked + .tile-choice__box { border-color: var(--blue-600); background: #E6F3FB; }
+.tile-choice input:checked + .tile-choice__box .tile-choice__icon { background: var(--blue-600); color: #fff; }
+.tile-choice input:checked + .tile-choice__box .tile-choice__check { opacity: 1; transform: none; }
+/* Electro tiles: yellow, like the Electro bar on the landing page */
+.picker__group--electro .tile-choice__icon { background: var(--accent-tint); color: var(--navy); }
+.picker__group--electro .tile-choice:hover .tile-choice__box { border-color: #D9A92E; }
+.picker__group--electro .tile-choice input:checked + .tile-choice__box { border-color: #D9A92E; background: var(--accent-tint); }
+.picker__group--electro .tile-choice input:checked + .tile-choice__box .tile-choice__icon { background: var(--accent); color: var(--navy); }
+.picker__group--electro .tile-choice__check { background: var(--navy); }
+.picker.is-invalid .tile-choice__box { border-color: var(--coral); }
+@media (max-width: 420px) { .picker__tiles { grid-template-columns: repeat(2, 1fr); } }

@@ -1,12 +1,33 @@
 import { icon, SITE, ELECTRO, ph, note, pageHero, logo, breadcrumbLd, GROUP_ROOT, todo } from '../layout.mjs';
-import { PRESTATIONS } from '../data.mjs';
+import { SOLUTIONS } from '../data.mjs';
 
-const ELECTRO_TOPICS = [
-  ['electro-conseil', 'Conseil produit ou demande de prix'],
-  ['electro-pro', 'Gamme professionnelle'],
-  ['electro-installation', 'Livraison et installation'],
-  ['electro-sav', 'Service après-vente'],
+// Service picker: icon tiles (radio buttons) instead of a dropdown. Same icons as the service categories.
+// Values match the ?prestation= parameter used by every "Demander un devis" link.
+const SERVICE_TILES = [
+  ...SOLUTIONS.map((s) => [s.key, s.icon, s.short]),
+  ['particuliers', 'home', 'Particuliers'],
+  ['complementaires', 'layers', 'Prestations complémentaires'],
 ];
+const ELECTRO_TILES = [
+  ['electro-conseil', 'tag', 'Conseil et prix'],
+  ['electro-pro', 'briefcase', 'Gamme professionnelle'],
+  ['electro-installation', 'truck', 'Livraison et installation'],
+  ['electro-sav', 'headset', 'Service après-vente'],
+];
+const pickerGroup = (title, tone, tiles, first = false) => `
+  <div class="picker__group picker__group--${tone}">
+    <p class="picker__title">${title}</p>
+    <div class="picker__tiles">${tiles.map(([value, ic, label], i) => `
+      <label class="tile-choice">
+        <input type="radio" name="prestation" value="${value}"${first && i === 0 ? ' required' : ''}>
+        <span class="tile-choice__box">
+          <span class="tile-choice__icon">${icon(ic)}</span>
+          <span class="tile-choice__label">${label}</span>
+          <span class="tile-choice__check" aria-hidden="true">${icon('check', 'icon icon--xs')}</span>
+        </span>
+      </label>`).join('')}
+    </div>
+  </div>`;
 
 export default {
   path: '/contact/',
@@ -35,14 +56,15 @@ ${pageHero({
             ${['Entreprise', 'Institution', 'Copropriété', 'Particulier'].map((v, i) => `<label class="choice"><input type="radio" name="profil" value="${v.toLowerCase()}"${i === 0 ? ' required' : ''}><span>${v}</span></label>`).join('')}
           </div>
         </div>
-        <div class="field"><label for="q-prest">Votre demande concerne</label>
-          <select id="q-prest" name="prestation" required>
-            <option value="">Choisir une prestation…</option>
-            <optgroup label="NCIEC Services — nettoyage et facility services">${PRESTATIONS.map((p) => `<option value="${p.value}">${p.label}</option>`).join('')}</optgroup>
-            <optgroup label="NCIEC Electro — électroménager">${ELECTRO_TOPICS.map(([v, l]) => `<option value="${v}">${l}</option>`).join('')}</optgroup>
-          </select>
+        <fieldset class="field picker-field">
+          <legend class="field__label">Votre demande concerne</legend>
+          <div class="choice-row picker">
+            ${pickerGroup('NCIEC Services', 'services', SERVICE_TILES, true)}
+            ${pickerGroup('NCIEC Electro', 'electro', ELECTRO_TILES)}
+            ${pickerGroup('Autre', 'other', [['autre', 'chat', 'Autre demande']])}
+          </div>
           <p class="field__hint" data-prefill-hint hidden>${icon('check', 'icon icon--xs')}Prérempli depuis la page que vous consultiez — modifiable.</p>
-        </div>
+        </fieldset>
         <div class="field-grid">
           <div class="field"><label for="q-surface">Surface approximative <span class="opt">(facultatif)</span></label><input id="q-surface" name="surface" placeholder="ex. 800 m², 3 étages"></div>
           <div class="field"><label for="q-loc">Localité</label><input id="q-loc" name="localite" autocomplete="address-level2" required></div>
