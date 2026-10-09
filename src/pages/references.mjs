@@ -1,4 +1,4 @@
-import { icon, devis, ph, note, btn, pageHero, ctaBand, breadcrumbLd, clientLogos } from '../layout.mjs';
+import { icon, devis, ph, note, btn, pageHero, ctaBand, breadcrumbLd, clientLogos, todo } from '../layout.mjs';
 
 const caseStudy = (n, image) => `
 <article class="case reveal">
@@ -30,15 +30,19 @@ ${pageHero({
   alt: 'Équipe NCIEC en intervention dans un plateau de bureaux',
 })}
 
+<div class="container todo-wrap">${todo("le nombre de sites entretenus et la surface du plus grand site (en m²).")}</div>
+
 <section class="section section--flush-top" aria-label="Clients">
   <div class="container">
     ${clientLogos()}
+    ${todo("l’accord écrit de chaque client pour afficher son logo, et le logo IL Cosmetics en haute définition (SVG ou PNG large ; le fichier actuel fait 171 px).")}
   </div>
 </section>
 
 <section class="section section--tint" aria-labelledby="cas-t">
   <div class="container">
     <h2 id="cas-t">Études de cas</h2>
+    ${todo("3 études de cas : le client ou le secteur (peut rester anonyme), le contexte (surface, occupants, contrainte principale), la prestation (périmètre, fréquence) et un résultat mesurable.")}
     <div class="case-list">
       ${caseStudy(1, 'robot-nettoyage')}
       ${caseStudy(2, 'parking-autolaveuse')}

@@ -1,4 +1,4 @@
-import { icon, ELECTRO, ph, note, btn, link, pageHero, ctaBand, eyebrow, logo, breadcrumbLd, GROUP_ROOT, certCards } from '../layout.mjs';
+import { icon, ELECTRO, ph, note, btn, link, pageHero, ctaBand, eyebrow, logo, breadcrumbLd, GROUP_ROOT, certCards, todo } from '../layout.mjs';
 
 export default {
   path: '/a-propos/',
@@ -17,6 +17,8 @@ ${pageHero({
   image: 'gestion-dechets',
   alt: 'Deux agents NCIEC en tenue haute visibilité',
 })}
+
+<div class="container todo-wrap">${todo("l’année de création de NCIEC et le nombre de collaborateurs.")}</div>
 
 <section class="section section--flush-top" aria-labelledby="activites-t">
   <div class="container">
@@ -55,10 +57,12 @@ ${pageHero({
     <h2 id="certif-t">Certifications</h2>
     <p class="lead certif-lead">Nos certifications imposent des procédures écrites, des audits réguliers et un suivi des incidents. Les numéros et organismes sont indiqués pour vos appels d’offres.</p>
     ${certCards()}
+    ${todo("les dates de validité des certificats ISO 9001 et 14001, et l’entité couverte (NCIEC Services, NCIEC Electro ou les deux). En option : les certificats en PDF pour un lien de téléchargement.")}
   </div>
 </section>
 
 <section class="section" aria-labelledby="equipes-t">
+  <div class="container">${todo("une vraie photo d’équipe (pas de banque d’images) et 2 à 3 phrases sur l’encadrement et la formation des équipes.")}</div>
   <div class="container split">
     <div class="split__text prose">
       <h2 id="equipes-t">Nos équipes</h2>

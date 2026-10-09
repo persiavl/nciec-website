@@ -1,4 +1,4 @@
-import { icon, SITE, SOLUTIONS, devis, ph, note, btn, link, img, eyebrow, ctaBand, clientLogos, certCards } from '../layout.mjs';
+import { icon, SITE, SOLUTIONS, devis, ph, note, btn, link, img, eyebrow, ctaBand, clientLogos, certCards, todo } from '../layout.mjs';
 
 export default {
   path: '/services/',
@@ -118,6 +118,7 @@ export default {
       <blockquote class="pull">Nos certifications ne sont pas un décor : elles imposent des procédures écrites, des audits réguliers et un suivi des incidents. C'est ce qui rend une prestation reproductible d'un mois sur l'autre.</blockquote>
     </div>
     ${certCards()}
+    ${todo("les dates de validité des certificats ISO 9001 et 14001, et l’entité couverte (NCIEC Services, NCIEC Electro ou les deux). En option : les certificats en PDF pour un lien de téléchargement.")}
     <p>${btn('En savoir plus sur nos engagements', '/a-propos/', 'ghost-light')}</p>
   </div>
 </section>
@@ -129,6 +130,7 @@ export default {
       <h2 id="confiance">Ils nous font confiance</h2>
     </div>
     ${clientLogos({ heading: '' })}
+    ${todo("l’accord écrit de chaque client pour afficher son logo, et le logo IL Cosmetics en haute définition (SVG ou PNG large ; le fichier actuel fait 171 px).")}
     
     <div class="testimonials">
       ${[1, 2, 3].map(() => `
@@ -137,10 +139,12 @@ export default {
         <figcaption><strong>${ph('Prénom Nom')}</strong><span>${ph('Fonction, société')}</span></figcaption>
       </figure>`).join('')}
     </div>
+    ${todo("2 à 3 témoignages de clients : une phrase concrète sur la prestation, avec le prénom, le nom, la fonction et la société.")}
     <p class="center">${btn('Voir nos références', '/references/', 'outline')}</p>
   </div>
 </section>
 
+<div class="container todo-wrap">${todo("les délais que vous garantissez : rappel après une demande (actuellement « 24 h ») et envoi du devis (actuellement « 48 h »).")}</div>
 ${ctaBand({
   title: 'Parlons de votre bâtiment',
   text: `Décrivez-nous vos surfaces et vos contraintes. Nous vous rappelons sous ${ph('24 h')} et proposons une visite sur site gratuite avant tout chiffrage.`,

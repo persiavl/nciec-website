@@ -1,4 +1,4 @@
-import { icon, devis, ph, note, btn, pageHero, toc, block, ctaBand, related, breadcrumbLd } from '../layout.mjs';
+import { icon, devis, ph, note, btn, pageHero, toc, block, ctaBand, related, breadcrumbLd, todo } from '../layout.mjs';
 
 const P = 'facades-toitures';
 
@@ -26,6 +26,7 @@ ${pageHero({
   image: 'haute-pression',
   alt: 'Agent NCIEC nettoyant un mur et une barrière au nettoyeur haute pression',
 })}
+<div class="container todo-wrap">${todo("un comparatif chiffré d’un vrai chantier si vous souhaitez afficher « 70 % moins cher qu’une nouvelle peinture » (sinon nous gardons la formulation actuelle), et la durée d’efficacité du traitement hydrofuge (en années).")}</div>
 ${toc([['diagnostic', 'Diagnostic'], ['techniques', 'Techniques'], ['toitures', 'Toitures'], ['protection', 'Hydrofuge et anti-graffitis']])}
 
 ${block({

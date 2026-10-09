@@ -1,4 +1,4 @@
-import { icon, ph, note, btn, pageHero, devis, GROUP_ROOT } from '../layout.mjs';
+import { icon, ph, note, btn, pageHero, devis, GROUP_ROOT, todo } from '../layout.mjs';
 
 // ---------- WCAG contrast, computed at build time for the palette page ----------
 const lum = (hex) => {
@@ -48,6 +48,7 @@ const legal = (path, title, h1) => ({
   body: () => `
 ${pageHero({ root: GROUP_ROOT, crumbs: [{ label: h1 }], title: h1 })}
 <section class="section section--flush-top"><div class="container narrow prose">
+  ${todo("le texte de cette page (texte actuel de nciec.lu, à relire).")}
   <p>${ph('Texte juridique')}</p>
 </div></section>`,
 });

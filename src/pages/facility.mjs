@@ -1,4 +1,4 @@
-import { icon, SITE, devis, ph, note, btn, pageHero, toc, block, ctaBand, related, complementaires, breadcrumbLd } from '../layout.mjs';
+import { icon, SITE, devis, ph, note, btn, pageHero, toc, block, ctaBand, related, complementaires, breadcrumbLd, todo } from '../layout.mjs';
 
 const P = 'facility-services';
 
@@ -39,6 +39,7 @@ ${toc([['sinistre', 'Après sinistre'], ['desinfection', 'Désinfection'], ['per
     <div class="tile-grid tile-grid--4">
       ${sinistres.map(([t, d]) => `<article class="tile reveal"><h3>${t}</h3><p>${d}</p></article>`).join('')}
     </div>
+    ${todo("un numéro d’urgence dédié aux sinistres. Sans ligne dédiée, nous retirons la promesse d’intervention urgente.")}
     <div class="urgent">
       <span class="urgent__icon">${icon('phone')}</span>
       <div><strong>Intervention urgente</strong><span>${ph('numéro dédié')} — à défaut ${SITE.phone}</span></div>

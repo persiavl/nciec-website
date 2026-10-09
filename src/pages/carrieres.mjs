@@ -1,4 +1,4 @@
-import { icon, ph, note, btn, pageHero, checklist, eyebrow, breadcrumbLd, GROUP_ROOT } from '../layout.mjs';
+import { icon, ph, note, btn, pageHero, checklist, eyebrow, breadcrumbLd, GROUP_ROOT, todo } from '../layout.mjs';
 
 const days = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
 const shifts = ['08h–14h', '08h–16h', '14h–22h', '22h–06h'];
@@ -28,6 +28,7 @@ ${pageHero({
 <section class="section" aria-labelledby="postes-t">
   <div class="container">
     <h2 id="postes-t">Postes ouverts</h2>
+    ${todo("pour chaque poste : temps plein ou partiel, fourchette salariale, et confirmation que la formation aux travaux en hauteur est assurée en interne. Y a-t-il des postes NCIEC Electro à publier (vente, livraison, installation) ?")}
     <div class="job-list">
       <article class="job reveal">
         <p class="job__unit">NCIEC Services</p><div class="job__head"><span class="job__icon">${icon('sparkle')}</span><h3>Agent d’entretien (H/F) — CDI</h3></div>

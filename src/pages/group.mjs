@@ -1,4 +1,4 @@
-import { icon, SITE, ELECTRO, devis, ph, note, btn, link, img, eyebrow, checklist, logo, GROUP_ROOT, clientLogos } from '../layout.mjs';
+import { icon, SITE, ELECTRO, devis, ph, note, btn, link, img, eyebrow, checklist, logo, GROUP_ROOT, clientLogos, todo } from '../layout.mjs';
 
 // Simple line illustration for the Electro card (no product photos available yet).
 const appliances = `
@@ -72,6 +72,7 @@ export default {
     <p class="g-vhero__eyebrow">Groupe NCIEC · Howald, Luxembourg</p>
     <h1 id="g-title"><span class="g-hl g-hl--services">Nettoyage</span> et <span class="g-hl g-hl--electro">électroménager</span><br>au Luxembourg</h1>
     <p class="g-vhero__lead">NCIEC Services nettoie et entretient vos bâtiments. NCIEC Electro vend, livre et installe vos appareils. Choisissez votre activité :</p>
+    ${todo("un visuel (photo ou vidéo) qui représente les deux sociétés, nettoyage et électroménager. Format paysage, 1920 × 1080 px minimum, sujet plutôt à droite.")}
   </div>
   <div class="container g-bars" aria-label="Nos deux sites">
     ${bar({ href: '/services/', name: 'NCIEC Services', what: 'Nettoyage et facility services', domain: 'nciec.lu/services', tone: 'services', external: false })}

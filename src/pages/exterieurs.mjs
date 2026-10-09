@@ -1,4 +1,4 @@
-import { icon, devis, ph, btn, pageHero, toc, block, ctaBand, related, checklist, breadcrumbLd } from '../layout.mjs';
+import { icon, devis, ph, btn, pageHero, toc, block, ctaBand, related, checklist, breadcrumbLd, todo } from '../layout.mjs';
 
 const P = 'exterieurs';
 
@@ -47,6 +47,7 @@ ${block({
       <p class="eyebrow">${icon('snow', 'icon icon--xs')} 24h/24 · 7j/7</p>
       <h2 id="hiver-t">Service hiver</h2>
       <p>Dès que le verglas arrive, les délais comptent — et la responsabilité du propriétaire est engagée sur les accès. Nos équipes sont mobilisables 24h/24 et 7j/7 pour le déneigement manuel et mécanique et le salage des entrées, trottoirs, escaliers, rampes et parkings.</p>
+      ${todo("la date limite pour réserver un contrat service hiver.")}
       <p class="deadline">${icon('clock', 'icon icon--sm')}<span>Le contrat hiver se cale avant ${ph('octobre')} : passé cette date, les créneaux se réduisent.</span></p>
       ${btn('Réserver un contrat service hiver', devis(P, 'service-hiver'), 'accent')}
     </div>

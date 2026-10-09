@@ -884,3 +884,13 @@ body:has(.g-vhero) .review-toggle { left: auto; right: 16px; bottom: 16px; }
 .g-legal a:hover { color: #fff; text-decoration-color: currentColor; }
 .g-vhero__pause { bottom: 12px; }
 @media (max-width: 560px) { .g-top__logo .logo { width: 104px; } .g-top__logo { padding: 8px 12px; } .g-legal { padding-left: 64px; justify-content: flex-start; } }
+
+/* ---------- "À fournir" notes (preview only; stripped in production and in DE/EN) ---------- */
+.todo-note { display: flex; gap: 12px; align-items: flex-start; margin: 20px 0; padding: 14px 18px; border-radius: var(--radius-sm); background: #FFF6DB; border: 1px dashed #D9A92E; color: #5B4300; font-size: .92rem; line-height: 1.5; text-align: left; }
+.todo-note > .icon { flex: none; color: #B8860B; margin-top: 1px; }
+.todo-note strong { color: #3D2E00; }
+.todo-wrap { padding-top: 28px; }
+.todo-wrap .todo-note { margin: 0; }
+.fiscal .todo-note { grid-column: 1 / -1; margin: 0; }
+.contact-aside .todo-note, .form-card > .todo-note { margin: 0 0 4px; }
+.g-vhero .todo-note { max-width: 62ch; margin: 18px 0 0; }

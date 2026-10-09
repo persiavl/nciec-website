@@ -1,4 +1,4 @@
-import { icon, devis, ph, note, btn, link, pageHero, toc, block, ctaBand, breadcrumbLd } from '../layout.mjs';
+import { icon, devis, ph, note, btn, link, pageHero, toc, block, ctaBand, breadcrumbLd, todo } from '../layout.mjs';
 
 const P = 'particuliers';
 
@@ -56,6 +56,7 @@ ${block({
       <p class="lead">Les frais de personnel domestique engagés via une entreprise agréée ouvrent droit à un abattement forfaitaire de <strong>5 400 € par an, dans la limite de 450 € par mois</strong>.</p>
       <p class="small">Source : ${ph('Administration des contributions directes — lien vers la disposition en vigueur pour l’année fiscale 2026')}</p>
     </div>
+    ${todo("la confirmation de l’abattement de 5 400 € par an (450 € par mois) pour l’année fiscale 2026, avec le lien officiel de l’Administration des contributions directes.")}
     <div class="fiscal__figure" aria-hidden="true">
       <span class="fiscal__big">450 €</span>
       <span class="fiscal__small">par mois, au maximum</span>

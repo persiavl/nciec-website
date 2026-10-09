@@ -29,3 +29,11 @@ French is the source and lives at the root (`/`, `/services/`, …). German is b
 - **When you change or add a French text, add the same key to both JSON files.** The build prints `[i18n] … untranslated segment(s)` with the missing keys, and the page falls back to French for those.
 - If a translation must start with a space because it follows a highlighted placeholder (e.g. German verb order "Seit [Jahr] pflegt …"), start the value with a space.
 - UI strings used by JavaScript (form errors, step label, redirect screen, message prefills) are in `NCIEC_I18N` at the top of `public/assets/js/main.js`.
+
+## "À fournir" notes (client input)
+
+Yellow dashed boxes starting with **À fournir :** mark information the client still has to supply. They are written with `todo()` in the page modules and appear only in the **French preview**.
+
+- The German and English versions never show them.
+- **Production build:** `PRODUCTION=1 node build.mjs` removes every note. Use this for the live site.
+- When the client supplies the information: fill in the content and delete the matching `todo(...)` call.

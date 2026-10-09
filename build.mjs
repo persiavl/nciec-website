@@ -99,7 +99,14 @@ const hreflangLinks = (path) => [
   `<link rel="alternate" hreflang="x-default" href="${SITE.url}${path}">`,
 ].join('\n');
 
+// "À fournir" notes are for the client's review of the French preview only.
+const PRODUCTION = process.env.PRODUCTION === '1';
+const stripTodos = (html) => html
+  .replace(/<div class="container(?: todo-wrap)?"><aside class="todo-note"[\s\S]*?<\/aside><\/div>\n?/g, '')
+  .replace(/\s*<aside class="todo-note"[\s\S]*?<\/aside>/g, '');
+
 function localize(html, path, lang) {
+  if (PRODUCTION || lang.code !== 'fr') html = stripTodos(html);
   if (lang.code !== 'fr') {
     html = translate(html, lang.code)
       .replace('<html lang="fr">', `<html lang="${lang.code}">`)

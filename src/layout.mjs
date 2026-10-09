@@ -30,6 +30,13 @@ export const ph = (text) => `<mark class="ph" title="À compléter par le client
 export const note = (html, tone = 'warn') =>
   `<aside class="editor-note editor-note--${tone}" data-review>${icon('alert')}<div>${html}</div></aside>`;
 
+/**
+ * "À fournir" note: information the client still has to supply. Shown in preview builds (French only);
+ * stripped from production builds (PRODUCTION=1) and from the DE/EN versions by build.mjs.
+ */
+export const todo = (html) =>
+  `<aside class="todo-note" role="note">${icon('file')}<div><strong>À fournir :</strong> ${html}</div></aside>`;
+
 export const btn = (label, href, variant = 'primary', extra = '') =>
   `<a class="btn btn--${variant}" href="${href}"${extra}>${label}${icon('arrow')}</a>`;
 

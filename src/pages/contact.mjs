@@ -1,4 +1,4 @@
-import { icon, SITE, ELECTRO, ph, note, pageHero, logo, breadcrumbLd, GROUP_ROOT } from '../layout.mjs';
+import { icon, SITE, ELECTRO, ph, note, pageHero, logo, breadcrumbLd, GROUP_ROOT, todo } from '../layout.mjs';
 import { PRESTATIONS } from '../data.mjs';
 
 const ELECTRO_TOPICS = [
@@ -28,6 +28,7 @@ ${pageHero({
   <div class="container contact-grid">
     <div class="form-card" id="devis">
       <h2>Votre demande</h2>
+      ${todo("l’adresse e-mail qui doit recevoir les demandes (une pour NCIEC Services, une pour NCIEC Electro ?).")}
       <form class="form" data-quote-form data-simple-form novalidate>
         <div class="field"><span class="field__label">Je suis</span>
           <div class="choice-row">
@@ -57,6 +58,7 @@ ${pageHero({
     </div>
 
     <aside class="contact-aside">
+      ${todo("les horaires d’ouverture de NCIEC Services, l’adresse e-mail de NCIEC Electro, un numéro d’urgence sinistre s’il existe, et les infos d’accès (parking visiteurs, arrêt de bus). À confirmer : téléphone +352 40 30 60 et horaires de NCIEC Electro.")}
       <div class="info-card">
         ${logo('services', 'NCIEC Services', 'g-contact__logo')}
         <address>
